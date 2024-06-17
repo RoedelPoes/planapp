@@ -69,10 +69,11 @@
     <div class="bg-gray-800 rounded-lg overflow-hidden shadow-xl transform transition-all sm:max-w-lg sm:w-full">
         <div class="bg-gray-700 px-4">
             <label for="title" class="text-white m-2 mt-4">Title</label>
+            <span id="titleError" class="text-red-500 w-full"></span>
             <input type="text"
                 class="w-full px-3 py-2 mb-3 bg-gray-900 text-gray-300 border border-gray-600 rounded-md focus:outline-none focus:ring-pink-400 focus:border-pink-400 sm:text-sm"
                 id="title" placeholder="Event Title">
-            <span id="titleError" class="text-red-500"></span>
+
 
             <div class="flex items-top mx-2">
                 <input type="checkbox" id="all_day"
@@ -134,11 +135,6 @@
         // Function to show booking modal
         function showBookingModal() {
             $('#bookingModal').removeClass('hidden');
-        }
-
-        // Function to close booking modal
-        function closeBookingModal() {
-            $('#bookingModal').addClass('hidden');
         }
 
         // Function to validate time range
@@ -336,7 +332,7 @@
                             // If successful, remove event from calendar
                             success: function(response) {
                                 $('#calendar').fullCalendar('removeEvents', response);
-                                // swal("Good job!", "Event Deleted!", "success");
+                                location.reload();
                             },
                             // If error, display error message
                             error: function(error) {

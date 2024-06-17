@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('title');
             $table->datetime('start_date');
             $table->datetime('end_date');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }
