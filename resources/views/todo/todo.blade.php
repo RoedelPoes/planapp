@@ -24,7 +24,19 @@
         </x-slot>
 
         <div class="py-12">
-            
+            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                <div class="h-auto w-full bg-pink-400 rounded mt-5 py-4">
+                    <h2 class="ml-6 mb-2 pb-0 text-white text-2xl">Todays tasks:</h2>
+                    <ul class="list-disc list-inside">
+                        @foreach ($todos as $item)
+                        <li class="flex flex-row">
+                            <p>{{$item->title}} </p>
+                            <input id="completed" type="checkbox" class="rounded dark:bg-gray-900 border-gray-300 dark:border-gray-700 text-pink-600 shadow-sm focus:ring-pink-500 dark:focus:ring-pink-600 dark:focus:ring-offset-gray-800" name="completed" checked="{{$item->completed}}">
+                        </li>
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
         </div>
     </x-app-layout>
 
