@@ -30,13 +30,11 @@
                     <ul class="list-disc list-inside">
                         @foreach ($todos as $todo)
                         <li class="flex items-center justify-between p-2 border border-gray-300 rounded-md mt-2 md-2 ">
-                            <form action="/todo/{{ $todo->id }}" method="POST" class="flex items-center">
+                            <form action="/todo/{{ $todo->id }}/complete" method="POST" class="flex items-center">
                                 <input type="checkbox" {{ $todo->completed ? 'checked' : '' }} onclick="this.form.submit()" class="rounded dark:bg-gray-900 border-gray-300 dark:border-gray-700 text-pink-600 shadow-sm focus:ring-pink-500 dark:focus:ring-pink-600 dark:focus:ring-offset-gray-800">
                             </form>
                             <span class="{{ $todo->completed ? 'line-through' : '' }} text-white">{{ $todo->title }}</span>
-                            <form action="/todo/{{ $todo->id }}" method="POST">
-                                @csrf
-                                @method('DELETE')
+                            <form action="/todo/{{ $todo->id }}/delete" method="POST">
                                 <button type="submit" class="text-red-500 hover:text-red-700">Remove</button>
                             </form>
                         </li>
