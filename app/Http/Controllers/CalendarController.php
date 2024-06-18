@@ -16,7 +16,7 @@ class CalendarController extends Controller
     {
         $events = array();
         $bookings = Booking::where('user_id', Auth::id())->get();
-        foreach($bookings as $booking) {
+        foreach ($bookings as $booking) {
             $events[] = [
                 'id'   => $booking->id,
                 'title' => $booking->title,
@@ -64,20 +64,47 @@ class CalendarController extends Controller
     /**
      * Update the specified resource in storage.
      */
+
     public function update(Request $request, $id)
     {
+        // Find the booking record for the authenticated user
         $booking = Booking::where('user_id', Auth::id())->find($id);
+
         if (!$booking) {
             return response()->json([
-                'error' => 'Unable to locate the event'
+                'error' => 'Booking not found or you do not have permission to update it'
             ], 404);
         }
-        $booking->update([
-            'start_date' => $request->start_date,
-            'end_date' => $request->end_date,
+
+        // Validate the request data for the specific scenario
+        $validatedData = $request->validate([
+            'title' => 'sometimes|string|max:255', // 'sometimes' allows for partial updates
+            'start_date' => 'required|date_format:Y-m-d H:i:s', // Requires full update of start_date
+            'end_date' => 'required|date_format:Y-m-d H:i:s', // Requires full update of end_date
         ]);
-        return response()->json('Event updated');
+
+        // Prepare data for update
+        $updateData = [
+            'start_date' => $validatedData['start_date'],
+            'end_date' => $validatedData['end_date'],
+        ];
+
+        // Only update title if provided
+        if (isset($validatedData['title'])) {
+            $updateData['title'] = $validatedData['title'];
+        }
+
+        // Update the booking record
+        $booking->update($updateData);
+
+        return response()->json([
+            'message' => 'Booking updated successfully',
+            'booking' => $booking // Optionally return the updated booking data
+        ]);
     }
+
+
+
 
     /**
      * Remove the specified resource from storage.

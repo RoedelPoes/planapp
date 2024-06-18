@@ -64,7 +64,7 @@
     </style>
 </head>
 
-<!-- Modal -->
+<!-- Insert Modal -->
 <div id="bookingModal" class="fixed inset-0 z-50 flex items-center justify-center hidden bg-gray-900 bg-opacity-75">
     <div class="bg-gray-800 rounded-lg overflow-hidden shadow-xl transform transition-all sm:max-w-lg sm:w-full">
         <div class="bg-gray-700 px-4">
@@ -109,7 +109,54 @@
         </div>
     </div>
 </div>
-<!-- Modal end -->
+<!-- Inert Modal end -->
+
+<!-- Edit Modal -->
+<div id="editModal" class="fixed inset-0 z-50 flex items-center justify-center hidden bg-gray-900 bg-opacity-75">
+    <div class="bg-gray-800 rounded-lg overflow-hidden shadow-xl transform transition-all sm:max-w-lg sm:w-full">
+        <div class="bg-gray-700 px-4 py-4">
+            <label for="editTitle" class="text-white m-2 mt-4">Edit Title</label>
+            <span id="editTitleError" class="text-red-500 w-full"></span>
+            <input type="text"
+                class="w-full px-3 py-2 mb-3 bg-gray-900 text-gray-300 border border-gray-600 rounded-md focus:outline-none focus:ring-pink-400 focus:border-pink-400 sm:text-sm"
+                id="editTitle" placeholder="Event Title">
+
+
+
+            <div class="flex justify-between">
+                <div>
+                    <label for="editStartTime" class="text-white m-2">Starting Time</label>
+                    <input type="datetime-local"
+                        class="w-full px-3 py-2 bg-gray-900 text-gray-300 border border-gray-600 rounded-md focus:outline-none focus:ring-pink-400 focus:border-pink-400 sm:text-sm"
+                        id="editStartTime" placeholder="Start Time">
+                </div>
+                <div>
+                    <label for="editEndTime" class="text-white m-2">Ending Time</label>
+                    <input type="datetime-local"
+                        class="w-full px-3 py-2 bg-gray-900 text-gray-300 border border-gray-600 rounded-md focus:outline-none focus:ring-pink-400 focus:border-pink-400 sm:text-sm"
+                        id="editEndTime" placeholder="End Time">
+                </div>
+            </div>
+        </div>
+        <div class="bg-gray-700 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+            <button type="button" id="saveEditBtn"
+                class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-pink-600 text-base font-medium text-white hover:bg-pink-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-400 sm:ml-3 sm:w-auto sm:text-sm">
+                Save changes
+            </button>
+            <button type="button" id="deleteEditButton"
+                class="w-full inline-flex justify-center rounded-md border border-red-600 shadow-sm px-4 py-2 bg-red-700 text-base font-medium text-gray-300 hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-400 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
+                Delete
+            </button>
+            <button type="button" id="closeEditBtn"
+                class="w-full inline-flex justify-center rounded-md border border-gray-600 shadow-sm px-4 py-2 bg-gray-700 text-base font-medium text-gray-300 hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
+                Close
+            </button>
+        </div>
+    </div>
+</div>
+<!-- Edit Modal end -->
+
+
 
 <x-app-layout>
     <x-slot name="header">
@@ -290,8 +337,8 @@
                 // Drag and drop event
                 eventDrop: function(event) {
                     var id = event.id;
-                    var start_date = moment(event.start).format('YYYY-MM-DD HH:mm:ss');
-                    var end_date = moment(event.end).format('YYYY-MM-DD HH:mm:ss');
+                    var start_date = moment(event.start).format('YYYY-MM-DD HH:mm');
+                    var end_date = moment(event.end).format('YYYY-MM-DD HH:mm');
 
                     // Update event
                     $.ajax({
@@ -312,18 +359,55 @@
                         },
                     });
                 },
-                // Delete event
-
-                //TODO: 
-                //Make this an edit event with popup to change date, time, and title. 
-                //Als add a delete button.
-                //Make the delete button a confirmation button.
-
+                // Edit event
                 eventClick: function(event) {
                     var id = event.id;
+                    var title = event.title;
+                    var start_date = moment(event.start).format('YYYY-MM-DD HH:mm:ss');
+                    var end_date = moment(event.end).format('YYYY-MM-DD HH:mm:ss');
 
-                    // Confirm deletion
-                    if (confirm('Are you sure want to remove it')) {
+                    // Show the edit modal
+                    $('#editModal').removeClass('hidden');
+
+                    // Populate modal fields with event data
+                    $('#editTitle').val(title);
+                    $('#editAllDay').prop('checked', event.allDay);
+                    $('#editStartTime').val(start_date);
+                    $('#editEndTime').val(end_date);
+
+                    // Handle Save button click
+                    $('#saveEditBtn').off('click').on('click', function() {
+                        var updatedTitle = $('#editTitle').val();
+                        var updatedStartTime = $('#editStartTime').val().replace('T', ' ') + ':00';
+                        var updatedEndTime = $('#editEndTime').val().replace('T', ' ') + ':00';
+
+                        // Update event via AJAX
+                        $.ajax({
+                            url: "{{ route('calendar.update', '') }}" + '/' + id,
+                            type: "PATCH",
+                            dataType: 'json',
+                            data: {
+                                title: updatedTitle,
+                                start_date: updatedStartTime,
+                                end_date: updatedEndTime,
+                            },
+                            success: function(response) {
+                                closeEditModal();
+                                location.reload();  
+                            },
+                            error: function(error) {
+                                console.log(error);
+                            }
+                        });
+                    });
+
+                    // Handle Close button click
+                    $('#closeEditBtn').off('click').on('click', function() {
+                        $('#editModal').addClass('hidden');
+                    });
+
+                    $('#deleteEditButton').off('click').on('click', function() {
+                        if (confirm('Are you sure want to remove it')) {
                         // Delete event
                         $.ajax({
                             url: "{{ route('calendar.destroy', '') }}" + '/' + id,
@@ -340,7 +424,7 @@
                             },
                         });
                     }
-
+                    });
                 },
                 // Resize event
                 eventResize: function(event) {
@@ -381,6 +465,11 @@
             function closeBookingModal() {
                 $('#bookingModal').addClass('hidden');
                 $('#saveBtn').off('click');
+            }
+
+            function closeEditModal() {
+                $('#editModal').addClass('hidden');
+                $('#saveEditBtn').off('click');
             }
 
             // Handle checkbox change for all-day events
