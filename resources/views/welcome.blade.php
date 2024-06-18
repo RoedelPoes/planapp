@@ -26,7 +26,7 @@
 
                 <h1 class="text-2xl">Welcome {{$name}}, today is <span class="text-white">{{$currentDay}}</span> </h1>
                 <div class="h-auto w-full bg-pink-400 rounded mt-5 py-4">
-                    <h2 class="ml-6 mb-2 pb-0 text-white text-2xl">Upcomming appointments:</h2>
+                    <h2 class="ml-6 mb-2 pb-0 text-white text-2xl">Upcoming appointments:</h2>
                     <div class="flex flex-col">
                         <!-- Display upcoming appointments -->
                         @forelse ($upcomingAppointments as $appointment)
