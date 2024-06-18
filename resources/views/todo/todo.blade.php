@@ -25,16 +25,16 @@
 
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="h-auto w-full bg-pink-400 rounded mt-5 py-4">
+                <div class="h-auto w-full rounded mt-5 py-4">
                     <h2 class="ml-6 mb-2 pb-0 text-white text-2xl">Todays tasks:</h2>
                     <ul class="list-disc list-inside">
                         @foreach ($todos as $todo)
-                        <li class="flex items-center justify-between p-2 border border-gray-300 rounded-md">
-                            <form action="/tasks/{{ $todo->id }}" method="POST" class="flex items-center">
+                        <li class="flex items-center justify-between p-2 border border-gray-300 rounded-md mt-2 md-2 ">
+                            <form action="/todo/{{ $todo->id }}" method="POST" class="flex items-center">
                                 <input type="checkbox" {{ $todo->completed ? 'checked' : '' }} onclick="this.form.submit()" class="rounded dark:bg-gray-900 border-gray-300 dark:border-gray-700 text-pink-600 shadow-sm focus:ring-pink-500 dark:focus:ring-pink-600 dark:focus:ring-offset-gray-800">
                             </form>
-                            <span class="{{ $todo->completed ? 'line-through' : '' }}">{{ $todo->title }}</span>
-                            <form action="/tasks/{{ $todo->id }}" method="POST">
+                            <span class="{{ $todo->completed ? 'line-through' : '' }} text-white">{{ $todo->title }}</span>
+                            <form action="/todo/{{ $todo->id }}" method="POST">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="text-red-500 hover:text-red-700">Remove</button>
