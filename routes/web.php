@@ -3,6 +3,7 @@
 use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TodoController;
 use Illuminate\Support\Facades\Route;
 
 //Home Route
@@ -25,5 +26,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+//Todo Routes
+Route::middleware('auth')->group(function () {
+    Route::get('todo', [TodoController::class, 'index'])->name('todo');
+});
 
 require __DIR__.'/auth.php';
