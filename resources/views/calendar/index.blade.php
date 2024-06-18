@@ -72,6 +72,13 @@
         .fc-axis>span {
             color: white;
         }
+
+
+        /* Input icons styling */
+        input[type="time"]::-webkit-calendar-picker-indicator,
+        input[type="datetime-local"]::-webkit-calendar-picker-indicator{
+            filter: invert(100%) grayscale(100%);
+        }
     </style>
 </head>
 
@@ -166,8 +173,6 @@
     </div>
     <!-- Edit Modal end -->
 
-    <!-- Edit Modal end -->
-
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
             {{ __('Calendar') }}
@@ -178,7 +183,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="flex justify-center">
                 <div id='calendar' class="text-white">
-
+                    <!-- Calendar will be displayed here -->
                 </div>
             </div>
         </div>
