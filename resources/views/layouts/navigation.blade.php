@@ -19,7 +19,10 @@
                         {{ __('Calendar') }}
                     </x-nav-link>
                     <x-nav-link :href="route('todo')" :active="request()->routeIs('todo')">
-                        {{ __('Todo') }}
+                        {{ __('To-Do') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('notes')" :active="request()->routeIs('notes')">
+                        {{ __('Notes') }}
                     </x-nav-link>
                 </div>
             </div>
