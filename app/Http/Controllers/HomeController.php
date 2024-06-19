@@ -15,6 +15,7 @@ class HomeController extends Controller
         $currentDay = Carbon::now()->format('F jS');
         $upcomingAppointments = Booking::where('user_id', Auth::id())
         ->where('start_date', '>=', now())
+        ->where('start_date', '<=', now()->addDays(5))
         ->orderBy('start_date')
         ->limit(3) 
         ->get();
