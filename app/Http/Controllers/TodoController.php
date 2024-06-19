@@ -10,9 +10,10 @@ class TodoController extends Controller
 {
     public function index()
     {
-        $events = array();
         $todos = Todo::where('user_id', Auth::id())->get();
 
         return view('todo.todo')->with(['todos' => $todos]);
     }
+
+    
 }

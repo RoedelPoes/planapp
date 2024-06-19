@@ -5,17 +5,52 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Home</title>
+    <title>To-do</title>
     @vite('resources/css/app.css')
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 </head>
 
 <body class="font-sans antialiased dark:bg-black dark:text-white/50">
 
     <x-app-layout>
+
+    <!-- Insert Modal -->
+    <div id="todoModal" class="fixed inset-0 z-50 flex items-center justify-center bg-gray-900 bg-opacity-75 hidden">
+        <div class="bg-gray-800 rounded-lg overflow-hidden shadow-xl transform transition-all sm:max-w-lg sm:w-full">
+            <div class="bg-gray-700 px-4 py-4">
+                <label for="title" class="text-white m-2 mt-2 block">Task</label>
+                <span id="titleError" class="text-red-500 w-full block"></span>
+                <input type="text"
+                    class="w-full px-3 py-2 mb-3 bg-gray-900 text-gray-300 border border-gray-600 rounded-md focus:outline-none focus:ring-pink-400 focus:border-pink-400 sm:text-sm"
+                    id="title" placeholder="Enter your task">
+
+                <div class="flex justify-between">
+                    <div class="w-full mr-2">
+                        <label for="start_time" class="text-white m-2 block">Date</label>
+                        <input type="date"
+                            class="w-full px-3 py-2 bg-gray-900 text-gray-300 border border-gray-600 rounded-md focus:outline-none focus:ring-pink-400 focus:border-pink-400 sm:text-sm"
+                            id="start_time">
+                    </div>
+                </div>
+            </div>
+            <div class="bg-gray-700 px-4 py-3 pb-6 sm:px-6 sm:flex sm:flex-row-reverse">
+                <button type="button" id="saveBtn"
+                    class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-pink-600 text-base font-medium text-white hover:bg-pink-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-400 sm:ml-3 sm:w-auto sm:text-sm">
+                    Save changes
+                </button>
+                <button type="button" id="closeBtn"
+                    class="w-full inline-flex justify-center rounded-md border border-gray-600 shadow-sm px-4 py-2 bg-gray-700 text-base font-medium text-gray-300 hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
 
         <x-slot name="header">
             <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
@@ -25,6 +60,12 @@
 
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                <button id="addTask" class="bg-pink-500 text-white font-bold py-2 px-4 rounded inline-flex items-center hover:bg-pink-700">
+                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                    </svg>
+                    <span>New task</span>
+                </button>
                 <div class="h-auto w-full rounded mt-5 py-4">
                     <h2 class="ml-6 mb-2 pb-0 text-white text-2xl">Todays tasks:</h2>
                     <ul class="list-disc list-inside">
@@ -44,8 +85,21 @@
             </div>
         </div>
     </x-app-layout>
-
+    
 </body>
+
+<script>
+ 
+    // Open booking modal
+    $('#addTask').on('click', function() {
+        $('#todoModal').removeClass('hidden');
+    });
+
+    // Close booking modal
+    $('#closeBtn').on('click', function() {
+        $('#todoModal').addClass('hidden');
+    });
+</script>
 
 </html>
 
