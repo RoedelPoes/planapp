@@ -411,6 +411,9 @@
                             },
                             error: function(error) {
                                 console.log(error);
+                                if (error.responseJSON.errors.title) {
+                                    $('#editTitleError').text(error.responseJSON.errors.title[0]);
+                                }
                             }
                         });
                     });
