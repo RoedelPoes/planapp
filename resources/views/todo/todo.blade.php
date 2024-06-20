@@ -30,7 +30,7 @@
             @csrf
             <div class="bg-gray-700 px-4 py-4">
                 <select name="tagColor">
-                    <option value="fuchsia">fusje</option>
+                    <option value="cyan">fusje</option>
                     <option value="green">green</option>
                     <option value="yellow">yellow</option>
                     <option value="purple">purple</option>
@@ -107,8 +107,8 @@
 
                     <h2 class="mt-10 ml-6 mb-2 pb-0 text-white text-2xl">Todays tasks:</h2>
                     <ul class="list-disc list-inside">
-                        @foreach ($todos as $todo)
-                        @if ($todo['date'] == $currentDay)
+                        @if ($todaysTodos->isNotEmpty())
+                        @foreach ($todaysTodos as $todo)
                         <li class="bg-gray-800 border {{ $todo->completed ? 'border-gray-500' : 'border-gray-300' }} rounded-md mt-2 md-2 flex">
                             <div class="bg-{{ $todo->tagColor }}-400 w-3 h-10 rounded-l-md"></div>
                             <div class="flex items-center justify-between p-2 w-full">
@@ -122,14 +122,17 @@
                                 <button type="submit" class="text-red-500 hover:text-red-700">Remove</button>
                             </form>
                         </li>
-                        @endif
                         @endforeach
+                        @else 
+                            <p>No tasks for today yet...</p>
+                        @endif
+
                     </ul>
 
                     <h2 class="mt-10 ml-6 mb-2 pb-0 text-white text-2xl">Upcoming tasks:</h2>
                     <ul class="list-disc list-inside">
-                        @foreach ($todos as $todo)
-                        @if ($todo['date'] > $currentDay)
+                        @if ($upcomingTodos->isNotEmpty())
+                        @foreach ($upcomingTodos as $todo)
                         <li class="bg-gray-800 border {{ $todo->completed ? 'border-gray-500' : 'border-gray-300' }} rounded-md mt-2 md-2 flex">
                             <div class="bg-{{ $todo->tagColor }}-400 w-3 h-10 rounded-l-md"></div>
                             <div class="flex items-center justify-between p-2 w-full">
@@ -143,8 +146,10 @@
                                 <button type="submit" class="text-red-500 hover:text-red-700">Remove</button>
                             </form>
                         </li>
-                        @endif
                         @endforeach
+                        @else 
+                            <p>No upcoming tasks yet...</p>
+                        @endif
                     </ul>
                 </div>
             </div>

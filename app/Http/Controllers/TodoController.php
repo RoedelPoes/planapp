@@ -14,13 +14,18 @@ class TodoController extends Controller
     {
         $currentDay = Carbon::now()->format('Y-m-d') . ' 00:00:00';
 
-        $todos = Todo::where('user_id', Auth::id())->orderBy('date')->get();
-
         $missedTodos = Todo::where('user_id', Auth::id())
         ->where('date', '<', $currentDay)
         ->where('completed', '0')->get();
 
-        return view('todo.todo')->with(['todos' => $todos, 'currentDay' => $currentDay, 'missedTodos' => $missedTodos]);
+        $todaysTodos = Todo::where('user_id', Auth::id())
+        ->where('date', '=', $currentDay)->get();
+
+        $upcomingTodos = Todo::where('user_id', Auth::id())->orderBy('date')
+        ->where('date', '>', $currentDay)->get();
+
+        return view('todo.todo')
+        ->with(['missedTodos' => $missedTodos,'todaysTodos' => $todaysTodos, 'upcomingTodos' => $upcomingTodos, 'currentDay' => $currentDay]);
     }
 
     /**
