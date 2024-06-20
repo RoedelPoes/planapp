@@ -30,7 +30,8 @@ Route::middleware('auth')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::get('todo', [TodoController::class, 'index'])->name('todo');
     Route::post('todo', [TodoController::class, 'store'])->name('todo.store');
-    Route::delete('todo/destroy/{id}', [TodoController::class, 'destroy'])->name('todo.destroy');
+    Route::post('todo/complete/{id}', [TodoController::class, 'update'])->name('todo.update');
+    Route::post('todo/destroy/{id}', [TodoController::class, 'destroy'])->name('todo.destroy');
 });
 
 require __DIR__.'/auth.php';

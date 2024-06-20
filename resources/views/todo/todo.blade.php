@@ -21,35 +21,44 @@
     <x-app-layout>
 
     <!-- Insert Modal -->
-    <div id="todoModal" class="fixed inset-0 z-50 flex items-center justify-center bg-gray-900 bg-opacity-75 hidden">
-        <div class="bg-gray-800 rounded-lg overflow-hidden shadow-xl transform transition-all sm:max-w-lg sm:w-full">
+    <div id="todoModal" class="fixed inset-0 z-50 flex items-center justify-center bg-gray-900 bg-opacity-75 
+    @if (!$errors->any())
+    hidden
+    @endif
+    ">
+        <form action="{{ route('todo.store') }}" method="post" class="bg-gray-800 rounded-lg overflow-hidden shadow-xl transform transition-all sm:max-w-lg sm:w-full">
+            @csrf
             <div class="bg-gray-700 px-4 py-4">
                 <label for="title" class="text-white m-2 mt-2 block">Task</label>
-                <span id="titleError" class="text-red-500 w-full block"></span>
+                @if ($errors->any())
+                @foreach ($errors->all() as $error)
+                <span id="titleError" class="text-red-500 w-full block">{{$error}}</span>
+                @endforeach
+                @endif
                 <input type="text"
                     class="w-full px-3 py-2 mb-3 bg-gray-900 text-gray-300 border border-gray-600 rounded-md focus:outline-none focus:ring-pink-400 focus:border-pink-400 sm:text-sm"
-                    id="title" placeholder="Enter your task">
+                    id="title" name="title" placeholder="Enter your task">
 
                 <div class="flex justify-between">
                     <div class="w-full mr-2">
                         <label for="start_time" class="text-white m-2 block">Date</label>
                         <input type="date"
                             class="w-full px-3 py-2 bg-gray-900 text-gray-300 border border-gray-600 rounded-md focus:outline-none focus:ring-pink-400 focus:border-pink-400 sm:text-sm"
-                            id="start_time">
+                            id="date" name="date">
                     </div>
                 </div>
             </div>
             <div class="bg-gray-700 px-4 py-3 pb-6 sm:px-6 sm:flex sm:flex-row-reverse">
-                <button type="button" id="saveBtn"
+                <button type="submit" id="saveBtn"
                     class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-pink-600 text-base font-medium text-white hover:bg-pink-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-400 sm:ml-3 sm:w-auto sm:text-sm">
-                    Save changes
+                    Create task
                 </button>
                 <button type="button" id="closeBtn"
                     class="w-full inline-flex justify-center rounded-md border border-gray-600 shadow-sm px-4 py-2 bg-gray-700 text-base font-medium text-gray-300 hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
                     Close
                 </button>
             </div>
-        </div>
+        </form>
     </div>
 
         <x-slot name="header">
@@ -71,11 +80,13 @@
                     <ul class="list-disc list-inside">
                         @foreach ($todos as $todo)
                         <li class="flex items-center justify-between p-2 border border-gray-300 rounded-md mt-2 md-2 ">
-                            <form action="/todo/{{ $todo->id }}/complete" method="POST" class="flex items-center">
+                            <form action="/todo/complete/{{ $todo->id }}" method="POST" class="flex items-center">
+                                @csrf
                                 <input type="checkbox" {{ $todo->completed ? 'checked' : '' }} onclick="this.form.submit()" class="rounded dark:bg-gray-900 border-gray-300 dark:border-gray-700 text-pink-600 shadow-sm focus:ring-pink-500 dark:focus:ring-pink-600 dark:focus:ring-offset-gray-800">
                             </form>
                             <span class="{{ $todo->completed ? 'line-through' : '' }} text-white">{{ $todo->title }}</span>
-                            <form action="/todo/{{ $todo->id }}/delete" method="POST">
+                            <form action="/todo/destroy/{{ $todo->id }}" method="POST">
+                                @csrf
                                 <button type="submit" class="text-red-500 hover:text-red-700">Remove</button>
                             </form>
                         </li>
