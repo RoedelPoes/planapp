@@ -26,11 +26,11 @@
                 <div id="color-tag" class="w-full {{-- bg-fushia-400 --}} h-10"></div>
                 <div id="radio-buttons" class="flex bg-gray-700 w-full mt-10 px-5 gap-5">
                     <div class="flex ">
-                        <input type="radio" id="pink-tag" name="color-radio" value="fuchsia" class="hidden peer"
+                        <input type="radio" id="cyan-tag" name="color-radio" value="cyan" class="hidden peer"
                             checked="checked" />
-                        <label for="pink-tag"
-                            class="h-min font-semibold text-sm py-1 px-6 bg-transparent text-white   border border-2 border-gray-200 rounded-lg cursor-pointer peer-checked:border-fuchsia-400 peer-checked:text-fuchsia-400 hover:text-gray-600 hover:bg-gray-900">
-                            Pink
+                        <label for="cyan-tag"
+                            class="h-min font-semibold text-sm py-1 px-6 bg-transparent text-white   border border-2 border-gray-200 rounded-lg cursor-pointer peer-checked:border-cyan-400 peer-checked:text-cyan-400 hover:text-gray-600 hover:bg-gray-900">
+                            Cyan
                         </label>
                     </div>
                     <div class="flex">
@@ -90,14 +90,14 @@
             class="fixed inset-0 z-50 flex items-center justify-center hidden bg-gray-900 bg-opacity-75">
             <div
                 class="bg-gray-700 rounded-lg overflow-hidden shadow-xl transform transition-all sm:max-w-lg sm:w-full">
-                <div id="edit-color-tag" class="w-full bg-fuchsia-400 h-10"></div>
+                <div id="edit-color-tag" class="w-full bg-cyan-400 h-10"></div>
                 <div id="editRadio-buttons" class="flex bg-gray-700 w-full mt-10 px-5 gap-5">
                     <div class="flex ">
-                        <input type="radio" id="edit-pink-tag" name="edit-color-radio" value="fuchsia"
+                        <input type="radio" id="edit-cyan-tag" name="edit-color-radio" value="cyan"
                             class="hidden peer" checked="checked" />
-                        <label for="edit-pink-tag"
-                            class="h-min font-semibold text-sm py-1 px-6 bg-transparent text-white border border-2 border-gray-200 rounded-lg cursor-pointer peer-checked:border-fuchsia-400 peer-checked:text-fuchsia-400 hover:text-gray-600 hover:bg-gray-900">
-                            Pink
+                        <label for="edit-cyan-tag"
+                            class="h-min font-semibold text-sm py-1 px-6 bg-transparent text-white border border-2 border-gray-200 rounded-lg cursor-pointer peer-checked:border-cyan-400 peer-checked:text-cyan-400 hover:text-gray-600 hover:bg-gray-900">
+                            Cyan
                         </label>
                     </div>
                     <div class="flex">
@@ -182,8 +182,8 @@
                                         <input type="radio" name="color-filter" id="color-filter-all" value="all" checked class="hidden peer/all">
                                         <label for="color-filter-all" class="cursor-pointer py-2 px-4 bg-gray-600 rounded-t-xl peer-checked/all:bg-gray-500">All</label>
                                     
-                                        <input type="radio" name="color-filter" id="color-filter-fuchsia" value="fuchsia" class="hidden peer/pink">
-                                        <label for="color-filter-fuchsia" class="cursor-pointer py-2 px-4 bg-gray-600  peer-checked/pink:bg-gray-500">Pink</label>
+                                        <input type="radio" name="color-filter" id="color-filter-cyan" value="cyan" class="hidden peer/cyan">
+                                        <label for="color-filter-cyan" class="cursor-pointer py-2 px-4 bg-gray-600  peer-checked/cyan:bg-gray-500">Cyan</label>
                                     
                                         <input type="radio" name="color-filter" id="color-filter-green" value="green" class="hidden peer/green">
                                         <label for="color-filter-green" class="cursor-pointer py-2 px-4 bg-gray-600  peer-checked/green:bg-gray-500">Green</label>
@@ -407,7 +407,7 @@
                     $('#title').val('');
                     $('#note-content').val('');
                     $('#color-tag').removeClass();
-                    $('#color-tag').addClass('w-full bg-fuchsia-400 h-10');
+                    $('#color-tag').addClass('w-full bg-cyan-400 h-10');
 
                     location.reload();
                 },
