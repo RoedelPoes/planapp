@@ -22,7 +22,10 @@ class NoteController extends Controller
         // Query notes based on the selected color filter
         $notes = Note::when($colorFilter && $colorFilter !== 'all', function ($query) use ($colorFilter) {
             return $query->where('tagColor', $colorFilter); 
-        })->where('user_id', Auth::id())->get();    
+        })
+        ->where('user_id', Auth::id())
+        ->orderBy('updated_at', 'desc')
+        ->get();     
 
         return view('notes.index')->with(['name' => auth()->user()->name, 'notes' => $notes]);
     }

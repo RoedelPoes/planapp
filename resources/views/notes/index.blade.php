@@ -175,126 +175,144 @@
                             <button id="create-note"
                                 class="text-l bg-pink-500 px-4 py-2 rounded text-white hover:bg-pink-600">Create
                                 Note</button>
-                                <div class="flex flex-col" >
-                                    <button class="text-l px-4 py-2 rounded  cursor-pointer hover:underline" id="filterBtn" >Filter</button>
-                                    <!-- Filter Modal -->
-                                    <form id="colorFilterForm" action="{{ route('notes') }}" method="GET" class="flex flex-col w-20 text-center z-50 absolute hidden">
-                                        <input type="radio" name="color-filter" id="color-filter-all" value="all" checked class="hidden peer/all">
-                                        <label for="color-filter-all" class="cursor-pointer py-2 px-4 bg-gray-600 rounded-t-xl peer-checked/all:bg-gray-500">All</label>
-                                    
-                                        <input type="radio" name="color-filter" id="color-filter-cyan" value="cyan" class="hidden peer/cyan">
-                                        <label for="color-filter-cyan" class="cursor-pointer py-2 px-4 bg-gray-600  peer-checked/cyan:bg-gray-500">Cyan</label>
-                                    
-                                        <input type="radio" name="color-filter" id="color-filter-green" value="green" class="hidden peer/green">
-                                        <label for="color-filter-green" class="cursor-pointer py-2 px-4 bg-gray-600  peer-checked/green:bg-gray-500">Green</label>
-                                    
-                                        <input type="radio" name="color-filter" id="color-filter-yellow" value="yellow" class="hidden peer/yellow">
-                                        <label for="color-filter-yellow" class="cursor-pointer py-2 px-4 bg-gray-600  peer-checked/yellow:bg-gray-500">Yellow</label>
-                                    
-                                        <input type="radio" name="color-filter" id="color-filter-purple" value="purple" class="hidden peer/purple">
-                                        <label for="color-filter-purple" class="cursor-pointer py-2 px-4 bg-gray-600 rounded-b-xl peer-checked/purple:bg-gray-500">Purple</label>
-                                    </form>
-                                </div>
-                            
+                            <div class="flex flex-col">
+                                <button class="text-l px-4 py-2 rounded  cursor-pointer hover:underline"
+                                    id="filterBtn">Filter</button>
+                                <!-- Filter Modal -->
+                                <form id="colorFilterForm" action="{{ route('notes') }}" method="GET"
+                                    class="flex flex-col w-20 text-center z-50 absolute hidden">
+                                    <input type="radio" name="color-filter" id="color-filter-all" value="all"
+                                        checked class="hidden peer/all">
+                                    <label for="color-filter-all"
+                                        class="cursor-pointer py-2 px-4 bg-gray-600 rounded-t-xl peer-checked/all:bg-gray-500">All</label>
+
+                                    <input type="radio" name="color-filter" id="color-filter-cyan" value="cyan"
+                                        class="hidden peer/cyan">
+                                    <label for="color-filter-cyan"
+                                        class="cursor-pointer py-2 px-4 bg-gray-600  peer-checked/cyan:bg-gray-500">Cyan</label>
+
+                                    <input type="radio" name="color-filter" id="color-filter-green" value="green"
+                                        class="hidden peer/green">
+                                    <label for="color-filter-green"
+                                        class="cursor-pointer py-2 px-4 bg-gray-600  peer-checked/green:bg-gray-500">Green</label>
+
+                                    <input type="radio" name="color-filter" id="color-filter-yellow"
+                                        value="yellow" class="hidden peer/yellow">
+                                    <label for="color-filter-yellow"
+                                        class="cursor-pointer py-2 px-4 bg-gray-600  peer-checked/yellow:bg-gray-500">Yellow</label>
+
+                                    <input type="radio" name="color-filter" id="color-filter-purple"
+                                        value="purple" class="hidden peer/purple">
+                                    <label for="color-filter-purple"
+                                        class="cursor-pointer py-2 px-4 bg-gray-600 rounded-b-xl peer-checked/purple:bg-gray-500">Purple</label>
+                                </form>
+                            </div>
+
                         </div>
                     </div>
 
-                   
+
 
 
 
                     <section id="notes" class="mt-10">
                         <div class="mx-auto">
-                            
-                            @if (count($notes) == 0)
-                                    <h3 class="text-lg w-full">You dont have any notes yet, check you filter to see if you really have no notes.</h1>
-                            @endif
-                            <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
-                                
-
-                                <ul class="space-y-8">
-                                    @foreach ($notes as $index => $note)
-                                        @if ($index % 3 == 0)
-                                            <li class="text-sm leading-6">
-                                                <div class="relative space-y-6 rounded-lg bg-slate-800">
-                                                    <div class="flex items-center space-x-4">
-                                                        <h3
-                                                            class="text-lg text-black font-semibold text-white bg-{{ $note->tagColor }}-400 w-full px-4 py-2 rounded-tr-lg rounded-tl-lg">
-                                                            {{ $note->title }}</h3>
-                                                    </div>
-                                                    <p class="text-gray-300 text-md px-4">{{ $note->content }}</p>
-                                                    <div class="flex justify-between">
-                                                        <p class="text-gray-500 px-4 pb-3">Last edited on
-                                                            {{ $note->updated_at->format('d-m-Y') }}</p>
-                                                        <p id="editBtn" data-id="{{ $note->id }}"
-                                                            data-title="{{ $note->title }}"
-                                                            data-content="{{ $note->content }}"
-                                                            data-color="{{ $note->tagColor }}"
-                                                            class="editBtn text-gray-500 px-4 pb-3 hover:underline cursor-pointer">
-                                                            Edit</p>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                        @endif
-                                    @endforeach
-                                </ul>
-
-                                <ul class="space-y-8">
-                                    @foreach ($notes as $index => $note)
-                                        @if ($index % 3 == 1)
-                                            <li class="text-sm leading-6">
-                                                <div class="relative space-y-6 rounded-lg bg-slate-800">
-                                                    <div class="flex items-center space-x-4">
-                                                        <h3
-                                                            class="text-lg text-black font-semibold text-white bg-{{ $note->tagColor }}-400 w-full px-4 py-2 rounded-tr-lg rounded-tl-lg">
-                                                            {{ $note->title }}</h3>
-                                                    </div>
-                                                    <p class="text-gray-300 text-md px-4">{{ $note->content }}</p>
-                                                    <div class="flex justify-between">
-                                                        <p class="text-gray-500 px-4 pb-3">Last edited on
-                                                            {{ $note->updated_at->format('d-m-Y') }}</p>
-                                                        <p id="editBtn" data-id="{{ $note->id }}"
-                                                            data-title="{{ $note->title }}"
-                                                            data-content="{{ $note->content }}"
-                                                            data-color="{{ $note->tagColor }}"
-                                                            class="editBtn text-gray-500 px-4 pb-3 hover:underline cursor-pointer">
-                                                            Edit</p>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                        @endif
-                                    @endforeach
-                                </ul>
-
-                                <ul class="space-y-8">
-                                    @foreach ($notes as $index => $note)
-                                        @if ($index % 3 == 2)
-                                            <li class="text-sm leading-6">
-                                                <div class="relative space-y-6 rounded-lg bg-slate-800">
-                                                    <div class="flex items-center space-x-4">
-                                                        <h3
-                                                            class="text-lg text-black font-semibold text-white bg-{{ $note->tagColor }}-400 w-full px-4 py-2 rounded-tr-lg rounded-tl-lg">
-                                                            {{ $note->title }}</h3>
-                                                    </div>
-                                                    <p class="text-gray-300 text-md px-4">{{ $note->content }}</p>
-                                                    <div class="flex justify-between">
-                                                        <p class="text-gray-500 px-4 pb-3">Last edited on
-                                                            {{ $note->updated_at->format('d-m-Y') }}</p>
-                                                        <p id="editBtn" data-id="{{ $note->id }}"
-                                                            data-title="{{ $note->title }}"
-                                                            data-content="{{ $note->content }}"
-                                                            data-color="{{ $note->tagColor }}"
-                                                            class="editBtn text-gray-500 px-4 pb-3 hover:underline cursor-pointer">
-                                                            Edit</p>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                        @endif
-                                    @endforeach
-                                </ul>
+                                @if (count($notes) == 0 && request()->has('color-filter') && request()->get('color-filter') != 'all')
+                                    <h3 class="text-lg w-full">No notes match your current filter criteria. Try
+                                        adjusting
+                                        your filters or create a new note to get started!</h3>
+                                @elseif (count($notes) == 0)
+                                    <h3 class="text-lg w-full">You have no notes yet. Create a new note to get
+                                        started!</h3>
+                                @endif
 
 
-                            </div>
+                                <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
+
+
+                                    <ul class="space-y-8">
+                                        @foreach ($notes as $index => $note)
+                                            @if ($index % 3 == 0)
+                                                <li class="text-sm leading-6">
+                                                    <div class="relative space-y-6 rounded-lg bg-slate-800">
+                                                        <div class="flex items-center space-x-4">
+                                                            <h3
+                                                                class="text-lg text-black font-semibold text-white bg-{{ $note->tagColor }}-400 w-full px-4 py-2 rounded-tr-lg rounded-tl-lg">
+                                                                {{ $note->title }}</h3>
+                                                        </div>
+                                                        <p class="text-gray-300 text-md px-4">{{ $note->content }}</p>
+                                                        <div class="flex justify-between">
+                                                            <p class="text-gray-500 px-4 pb-3">Last edited on
+                                                                {{ $note->updated_at->format('d-m-Y') }}</p>
+                                                            <p id="editBtn" data-id="{{ $note->id }}"
+                                                                data-title="{{ $note->title }}"
+                                                                data-content="{{ $note->content }}"
+                                                                data-color="{{ $note->tagColor }}"
+                                                                class="editBtn text-gray-500 px-4 pb-3 hover:underline cursor-pointer">
+                                                                Edit</p>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            @endif
+                                        @endforeach
+                                    </ul>
+
+                                    <ul class="space-y-8">
+                                        @foreach ($notes as $index => $note)
+                                            @if ($index % 3 == 1)
+                                                <li class="text-sm leading-6">
+                                                    <div class="relative space-y-6 rounded-lg bg-slate-800">
+                                                        <div class="flex items-center space-x-4">
+                                                            <h3
+                                                                class="text-lg text-black font-semibold text-white bg-{{ $note->tagColor }}-400 w-full px-4 py-2 rounded-tr-lg rounded-tl-lg">
+                                                                {{ $note->title }}</h3>
+                                                        </div>
+                                                        <p class="text-gray-300 text-md px-4">{{ $note->content }}</p>
+                                                        <div class="flex justify-between">
+                                                            <p class="text-gray-500 px-4 pb-3">Last edited on
+                                                                {{ $note->updated_at->format('d-m-Y') }}</p>
+                                                            <p id="editBtn" data-id="{{ $note->id }}"
+                                                                data-title="{{ $note->title }}"
+                                                                data-content="{{ $note->content }}"
+                                                                data-color="{{ $note->tagColor }}"
+                                                                class="editBtn text-gray-500 px-4 pb-3 hover:underline cursor-pointer">
+                                                                Edit</p>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            @endif
+                                        @endforeach
+                                    </ul>
+
+                                    <ul class="space-y-8">
+                                        @foreach ($notes as $index => $note)
+                                            @if ($index % 3 == 2)
+                                                <li class="text-sm leading-6">
+                                                    <div class="relative space-y-6 rounded-lg bg-slate-800">
+                                                        <div class="flex items-center space-x-4">
+                                                            <h3
+                                                                class="text-lg text-black font-semibold text-white bg-{{ $note->tagColor }}-400 w-full px-4 py-2 rounded-tr-lg rounded-tl-lg">
+                                                                {{ $note->title }}</h3>
+                                                        </div>
+                                                        <p class="text-gray-300 text-md px-4">{{ $note->content }}</p>
+                                                        <div class="flex justify-between">
+                                                            <p class="text-gray-500 px-4 pb-3">Last edited on
+                                                                {{ $note->updated_at->format('d-m-Y') }}</p>
+                                                            <p id="editBtn" data-id="{{ $note->id }}"
+                                                                data-title="{{ $note->title }}"
+                                                                data-content="{{ $note->content }}"
+                                                                data-color="{{ $note->tagColor }}"
+                                                                class="editBtn text-gray-500 px-4 pb-3 hover:underline cursor-pointer">
+                                                                Edit</p>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            @endif
+                                        @endforeach
+                                    </ul>
+
+
+                                </div>
                         </div>
                     </section>
                 </div>
