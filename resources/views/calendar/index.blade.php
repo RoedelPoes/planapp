@@ -87,7 +87,7 @@
     <!-- Insert Modal -->
     <div id="bookingModal" class="fixed inset-0 z-50 flex items-center justify-center hidden bg-gray-900 bg-opacity-75">
         <div class="bg-gray-800 rounded-lg overflow-hidden shadow-xl transform transition-all sm:max-w-lg sm:w-full">
-            <div class="bg-gray-700 px-4 py-4">
+            <div class="bg-gray-700 px-4 py-4"> 
                 <label for="title" class="text-white m-2 mt-2 block">Title</label>
                 <span id="titleError" class="text-red-500 w-full block"></span>
                 <input type="text"
@@ -292,6 +292,7 @@
                         var start_time = $('#start_time').val();
                         var end_time = $('#end_time').val();
                         var date = moment(start).format('YYYY-MM-DD');
+                        //var color = $('input[name=color-radio]:checked').val();
 
                         // Determine if it's an all-day event
                         var isAllDay = $('#all_day').prop('checked');

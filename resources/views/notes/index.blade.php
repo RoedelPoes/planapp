@@ -23,34 +23,34 @@
         <div id="notesModal" class="fixed inset-0 z-50 flex items-center justify-center hidden bg-gray-900 bg-opacity-75">
             <div
                 class="bg-gray-700 rounded-lg overflow-hidden shadow-xl transform transition-all sm:max-w-lg sm:w-full">
-                <div id="color-tag" class="w-full bg-fuchsia-400 h-10"></div>
+                <div id="color-tag" class="w-full {{-- bg-fushia-400 --}} h-10"></div>
                 <div id="radio-buttons" class="flex bg-gray-700 w-full mt-10 px-5 gap-5">
                     <div class="flex ">
                         <input type="radio" id="pink-tag" name="color-radio" value="fuchsia" class="hidden peer"
                             checked="checked" />
                         <label for="pink-tag"
-                            class="h-min font-semibold text-sm py-1 px-6 bg-inherit text-white bg-white border border-2 border-gray-200 rounded-lg cursor-pointer peer-checked:border-fuchsia-400 peer-checked:text-fuchsia-400 hover:text-gray-600 hover:bg-gray-900">
+                            class="h-min font-semibold text-sm py-1 px-6 bg-transparent text-white   border border-2 border-gray-200 rounded-lg cursor-pointer peer-checked:border-fuchsia-400 peer-checked:text-fuchsia-400 hover:text-gray-600 hover:bg-gray-900">
                             Pink
                         </label>
                     </div>
                     <div class="flex">
                         <input type="radio" id="green-tag" name="color-radio" value="green" class="hidden peer" />
                         <label for="green-tag"
-                            class="h-min font-semibold text-sm py-1 px-6 bg-inherit text-white bg-white border border-2 border-gray-200 rounded-lg cursor-pointer peer-checked:border-green-500 peer-checked:text-green-500 hover:text-gray-600 hover:bg-gray-900">
+                            class="h-min font-semibold text-sm py-1 px-6 bg-transparent text-white border border-2 border-gray-200 rounded-lg cursor-pointer peer-checked:border-green-500 peer-checked:text-green-500 hover:text-gray-600 hover:bg-gray-900">
                             Green
                         </label>
                     </div>
                     <div class="flex">
                         <input type="radio" id="yellow-tag" name="color-radio" value="yellow" class="hidden peer" />
                         <label for="yellow-tag"
-                            class="h-min font-semibold text-sm py-1 px-6 bg-inherit text-white bg-white border border-2 border-gray-200 rounded-lg cursor-pointer peer-checked:border-yellow-500 peer-checked:text-yellow-500 hover:text-gray-600 hover:bg-gray-900">
+                            class="h-min font-semibold text-sm py-1 px-6 bg-transparent text-white border border-2 border-gray-200 rounded-lg cursor-pointer peer-checked:border-yellow-500 peer-checked:text-yellow-500 hover:text-gray-600 hover:bg-gray-900">
                             Yellow
                         </label>
                     </div>
                     <div class="flex">
                         <input type="radio" id="purple-tag" name="color-radio" value="purple" class="hidden peer" />
                         <label for="purple-tag"
-                            class="h-min font-semibold text-sm py-1 px-6 bg-inherit text-white bg-white border border-2 border-gray-200 rounded-lg cursor-pointer peer-checked:border-purple-500 peer-checked:text-purple-500 hover:text-gray-600 hover:bg-gray-900">
+                            class="h-min font-semibold text-sm py-1 px-6 bg-transparent text-white border border-2 border-gray-200 rounded-lg cursor-pointer peer-checked:border-purple-500 peer-checked:text-purple-500 hover:text-gray-600 hover:bg-gray-900">
                             Purple
                         </label>
                     </div>
@@ -90,13 +90,13 @@
             class="fixed inset-0 z-50 flex items-center justify-center hidden bg-gray-900 bg-opacity-75">
             <div
                 class="bg-gray-700 rounded-lg overflow-hidden shadow-xl transform transition-all sm:max-w-lg sm:w-full">
-                <div id="edit-color-tag" class="w-full bg-purple-400 h-10"></div>
+                <div id="edit-color-tag" class="w-full bg-fuchsia-400 h-10"></div>
                 <div id="editRadio-buttons" class="flex bg-gray-700 w-full mt-10 px-5 gap-5">
                     <div class="flex ">
                         <input type="radio" id="edit-pink-tag" name="edit-color-radio" value="fuchsia"
                             class="hidden peer" checked="checked" />
                         <label for="edit-pink-tag"
-                            class="h-min font-semibold text-sm py-1 px-6 bg-inherit text-white bg-white border border-2 border-gray-200 rounded-lg cursor-pointer peer-checked:border-fuchsia-400 peer-checked:text-fuchsia-400 hover:text-gray-600 hover:bg-gray-900">
+                            class="h-min font-semibold text-sm py-1 px-6 bg-transparent text-white border border-2 border-gray-200 rounded-lg cursor-pointer peer-checked:border-fuchsia-400 peer-checked:text-fuchsia-400 hover:text-gray-600 hover:bg-gray-900">
                             Pink
                         </label>
                     </div>
@@ -104,7 +104,7 @@
                         <input type="radio" id="edit-green-tag" name="edit-color-radio" value="green"
                             class="hidden peer" />
                         <label for="edit-green-tag"
-                            class="h-min font-semibold text-sm py-1 px-6 bg-inherit text-white bg-white border border-2 border-gray-200 rounded-lg cursor-pointer peer-checked:border-green-500 peer-checked:text-green-500 hover:text-gray-600 hover:bg-gray-900">
+                            class="h-min font-semibold text-sm py-1 px-6 bg-transparent text-white border border-2 border-gray-200 rounded-lg cursor-pointer peer-checked:border-green-500 peer-checked:text-green-500 hover:text-gray-600 hover:bg-gray-900">
                             Green
                         </label>
                     </div>
@@ -112,7 +112,7 @@
                         <input type="radio" id="edit-yellow-tag" name="edit-color-radio" value="yellow"
                             class="hidden peer" />
                         <label for="edit-yellow-tag"
-                            class="h-min font-semibold text-sm py-1 px-6 bg-inherit text-white bg-white border border-2 border-gray-200 rounded-lg cursor-pointer peer-checked:border-yellow-500 peer-checked:text-yellow-500 hover:text-gray-600 hover:bg-gray-900">
+                            class="h-min font-semibold text-sm py-1 px-6 bg-transparent text-white border border-2 border-gray-200 rounded-lg cursor-pointer peer-checked:border-yellow-500 peer-checked:text-yellow-500 hover:text-gray-600 hover:bg-gray-900">
                             Yellow
                         </label>
                     </div>
@@ -120,7 +120,7 @@
                         <input type="radio" id="edit-purple-tag" name="edit-color-radio" value="purple"
                             class="hidden peer" />
                         <label for="edit-purple-tag"
-                            class="h-min font-semibold text-sm py-1 px-6 bg-inherit text-white bg-white border border-2 border-gray-200 rounded-lg cursor-pointer peer-checked:border-purple-500 peer-checked:text-purple-500 hover:text-gray-600 hover:bg-gray-900">
+                            class="h-min font-semibold text-sm py-1 px-6 bg-transparent text-white border border-2 border-gray-200 rounded-lg cursor-pointer peer-checked:border-purple-500 peer-checked:text-purple-500 hover:text-gray-600 hover:bg-gray-900">
                             Purple
                         </label>
                     </div>
@@ -175,10 +175,35 @@
                             <button id="create-note"
                                 class="text-l bg-pink-500 px-4 py-2 rounded text-white hover:bg-pink-600">Create
                                 Note</button>
-                            <button class="text-l px-4 py-2 rounded  cursor-pointer hover:underline">Filter</button>
+                                <div class="flex flex-col" >
+                                    <button class="text-l px-4 py-2 rounded  cursor-pointer hover:underline" id="filterBtn" >Filter</button>
+                                    <!-- Filter Modal -->
+                                    <form id="colorFilterForm" action="{{ route('notes') }}" method="GET" class="flex flex-col w-20 text-center z-50 absolute hidden">
+                                        <input type="radio" name="color-filter" id="color-filter-all" value="all" checked class="hidden peer/all">
+                                        <label for="color-filter-all" class="cursor-pointer py-2 px-4 bg-gray-600 rounded-t-xl peer-checked/all:bg-gray-500">All</label>
+                                    
+                                        <input type="radio" name="color-filter" id="color-filter-fuchsia" value="fuchsia" class="hidden peer/pink">
+                                        <label for="color-filter-fuchsia" class="cursor-pointer py-2 px-4 bg-gray-600  peer-checked/pink:bg-gray-500">Pink</label>
+                                    
+                                        <input type="radio" name="color-filter" id="color-filter-green" value="green" class="hidden peer/green">
+                                        <label for="color-filter-green" class="cursor-pointer py-2 px-4 bg-gray-600  peer-checked/green:bg-gray-500">Green</label>
+                                    
+                                        <input type="radio" name="color-filter" id="color-filter-yellow" value="yellow" class="hidden peer/yellow">
+                                        <label for="color-filter-yellow" class="cursor-pointer py-2 px-4 bg-gray-600  peer-checked/yellow:bg-gray-500">Yellow</label>
+                                    
+                                        <input type="radio" name="color-filter" id="color-filter-purple" value="purple" class="hidden peer/purple">
+                                        <label for="color-filter-purple" class="cursor-pointer py-2 px-4 bg-gray-600 rounded-b-xl peer-checked/purple:bg-gray-500">Purple</label>
+                                    </form>
+                                </div>
+                            
                         </div>
                     </div>
-                    <section id="testimonies" class="mt-10">
+
+                   
+
+
+
+                    <section id="notes" class="mt-10">
                         <div class="mx-auto">
                             <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
 
@@ -189,7 +214,7 @@
                                                 <div class="relative space-y-6 rounded-lg bg-slate-800">
                                                     <div class="flex items-center space-x-4">
                                                         <h3
-                                                            class="text-lg font-semibold text-white bg-{{ $note->tagColor }}-400 w-full px-4 py-2 rounded-tr-lg rounded-tl-lg">
+                                                            class="text-lg text-black font-semibold text-white bg-{{ $note->tagColor }}-400 w-full px-4 py-2 rounded-tr-lg rounded-tl-lg">
                                                             {{ $note->title }}</h3>
                                                     </div>
                                                     <p class="text-gray-300 text-md px-4">{{ $note->content }}</p>
@@ -216,7 +241,7 @@
                                                 <div class="relative space-y-6 rounded-lg bg-slate-800">
                                                     <div class="flex items-center space-x-4">
                                                         <h3
-                                                            class="text-lg font-semibold text-white bg-{{ $note->tagColor }}-400 w-full px-4 py-2 rounded-tr-lg rounded-tl-lg">
+                                                            class="text-lg text-black font-semibold text-white bg-{{ $note->tagColor }}-400 w-full px-4 py-2 rounded-tr-lg rounded-tl-lg">
                                                             {{ $note->title }}</h3>
                                                     </div>
                                                     <p class="text-gray-300 text-md px-4">{{ $note->content }}</p>
@@ -243,7 +268,7 @@
                                                 <div class="relative space-y-6 rounded-lg bg-slate-800">
                                                     <div class="flex items-center space-x-4">
                                                         <h3
-                                                            class="text-lg font-semibold text-white bg-{{ $note->tagColor }}-400 w-full px-4 py-2 rounded-tr-lg rounded-tl-lg">
+                                                            class="text-lg text-black font-semibold text-white bg-{{ $note->tagColor }}-400 w-full px-4 py-2 rounded-tr-lg rounded-tl-lg">
                                                             {{ $note->title }}</h3>
                                                     </div>
                                                     <p class="text-gray-300 text-md px-4">{{ $note->content }}</p>
@@ -280,9 +305,42 @@
             }
         });
 
+        //Open filter modal
+        $('#filterBtn').click(function() {
+            $('#colorFilterForm').removeClass('hidden');
+        });
+
+        $(document).ready(function() {
+            $('.filter-button').click(function() {
+                var color = $(this).data('color');
+
+                //Close the modal
+                $('#colorFilterForm').addClass('hidden');
+
+                $.ajax({
+                    url: "{{ route('notes') }}",
+                    type: 'GET',
+                    data: {
+                        color: color
+                    },
+                    success: function(response) {
+                        console.log(response);
+                    },
+                    error: function(error) {
+                        console.log(error);
+                    }
+                });
+            });
+        });
+
         //Open Create Modal
         $('#create-note').click(function() {
             $('#notesModal').removeClass('hidden');
+
+            var color = $('input[name="color-radio"]:checked').val();
+            console.log(color);
+            $('#color-tag').removeClass();
+            $('#color-tag').addClass('w-full bg-' + color + '-400 h-10');
         });
 
         //Close Create Modal
@@ -290,11 +348,26 @@
             $('#notesModal').addClass('hidden');
         });
 
-        //Change color tag on radio button change
         $('#radio-buttons input').on('change', function() {
             var color = $(this).val();
             $('#color-tag').removeClass();
             $('#color-tag').addClass('w-full bg-' + color + '-400 h-10');
+        });
+
+        //Set filter on change
+        $('#colorFilterForm').on('change', function() {
+            $('#colorFilterForm').submit();
+        });
+
+        //set radio button on load
+        $(document).ready(function() {
+            //get color from url
+            var color = new URLSearchParams(window.location.search).get('color-filter');
+            if (color == 'all') {
+                $('#color-filter-all').prop('checked', true);
+            } else {
+                $('#color-filter-' + color).prop('checked', true);
+            }
         });
 
         //Save Note to the database
@@ -344,6 +417,10 @@
         $('.editBtn').click(function() {
             $('#editNotesModal').removeClass('hidden'); //Open Edit Modal
 
+            var color = $(this).val();
+            $('#color-tag').removeClass();
+            $('#color-tag').addClass('w-full bg-' + color + '-400 h-10');
+
             //Get the values from the clicked note
             var id = $(this).data('id');
             var title = $(this).data('title');
@@ -366,15 +443,15 @@
             // Set the id to the save button
             $('#editSaveBtnNotes').data('id', id);
 
-            
+
 
         });
 
         //Change color tag on radio button change for edit modal
         $('#editRadio-buttons input').on('change', function() {
-                var color = $(this).val();
-                $('#edit-color-tag').removeClass();
-                $('#edit-color-tag').addClass('w-full bg-' + color + '-400 h-10');
+            var color = $(this).val();
+            $('#edit-color-tag').removeClass();
+            $('#edit-color-tag').addClass('w-full bg-' + color + '-400 h-10');
         });
 
         //Close Edit Modal
