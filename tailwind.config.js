@@ -9,7 +9,7 @@ export default {
         './resources/views/**/*.blade.php',
     ],
     safelist: [
-        'bg-fuchsia-400',
+        'bg-cyan-400',
         'bg-green-400',
         'bg-yellow-400',
         'bg-purple-400',
