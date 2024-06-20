@@ -205,7 +205,12 @@
 
                     <section id="notes" class="mt-10">
                         <div class="mx-auto">
+                            
+                            @if (count($notes) == 0)
+                                    <h3 class="text-lg w-full">You dont have any notes yet, check you filter to see if you really have no notes.</h1>
+                            @endif
                             <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
+                                
 
                                 <ul class="space-y-8">
                                     @foreach ($notes as $index => $note)
