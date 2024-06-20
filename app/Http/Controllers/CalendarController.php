@@ -52,15 +52,6 @@ class CalendarController extends Controller
         ]);
     }
 
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
     /**
      * Update the specified resource in storage.
      */
@@ -98,14 +89,12 @@ class CalendarController extends Controller
         $booking->update($updateData);
 
         return response()->json([
-            'message' => 'Booking updated successfully',
-            'booking' => $booking // Optionally return the updated booking data
+            'id' => $booking->id,
+            'title' => $booking->title,
+            'start' => $booking->start_date,
+            'end' => $booking->end_date,
         ]);
     }
-
-
-
-
     /**
      * Remove the specified resource from storage.
      */
