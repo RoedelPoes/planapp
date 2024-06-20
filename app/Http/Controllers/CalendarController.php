@@ -24,8 +24,10 @@ class CalendarController extends Controller
                 'end' => $booking->end_date,
             ];
         }
+
         return view('calendar.index', ['events' => $events]);
     }
+
     /**
      * Store a newly created resource in storage.
      */

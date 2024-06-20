@@ -12,10 +12,18 @@ class NoteController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         //
-        $notes = Note::where('user_id', Auth::id())->get();
+        //$notes = Note::where('user_id', Auth::id());
+
+        $colorFilter = $request->input('color-filter');
+
+        // Query notes based on the selected color filter
+        $notes = Note::when($colorFilter && $colorFilter !== 'all', function ($query) use ($colorFilter) {
+            return $query->where('tagColor', $colorFilter); 
+        })->where('user_id', Auth::id())->get();    
+
         return view('notes.index')->with(['name' => auth()->user()->name, 'notes' => $notes]);
     }
     /**
