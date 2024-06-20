@@ -25,18 +25,18 @@
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
 
                 <h1 class="text-2xl">Welcome {{$name}}, today is <span class="text-white">{{$currentDay}}</span> </h1>
-                <div class="h-auto w-full bg-pink-400 rounded mt-5 py-4">
+                <div class="h-auto w-full bg-gray-700 rounded mt-5 py-4">
                     <h2 class="ml-6 mb-2 pb-0 text-white text-2xl">Upcoming appointments:</h2>
                     <div class="flex flex-col">
                         <!-- Display upcoming appointments -->
                         @forelse ($upcomingAppointments as $appointment)
-                            <a href="{{ url('calendar') }}" class="mx-6 my-2 h-auto w-auto m-0 bg-pink-700 rounded">
-                                <p class="text-white ml-4 mt-2">{{ $appointment->title }}</p>
+                            <a href="{{ url('calendar') }}" class="mx-6 my-2 h-auto w-auto m-0 rounded bg-[{{ $appointment->color }}]/100">
+                                <p class="text-black ml-4 mt-2">{{ $appointment->title }}</p>
                                 <!-- Check if the appointment is an all day event -->
                                 @if (\Carbon\Carbon::parse($appointment->start_date)->format('H:i') === '00:00' && \Carbon\Carbon::parse($appointment->end_date)->format('H:i') === '23:59')
-                                    <p class="ml-4 mb-2">{{ \Carbon\Carbon::parse($appointment->start_date)->format('F jS') }} | All Day</p>
+                                    <p class="ml-4 mb-2 text-black">{{ \Carbon\Carbon::parse($appointment->start_date)->format('F jS') }} | All Day</p>
                                 @else
-                                    <p class="ml-4 mb-2">{{ \Carbon\Carbon::parse($appointment->start_date)->format('F jS') }} | {{ \Carbon\Carbon::parse($appointment->start_date)->format('h:i A') }} - {{ \Carbon\Carbon::parse($appointment->end_date)->format('h:i A') }}</p>
+                                    <p class="ml-4 mb-2 text-black">{{ \Carbon\Carbon::parse($appointment->start_date)->format('F jS') }} | {{ \Carbon\Carbon::parse($appointment->start_date)->format('h:i A') }} - {{ \Carbon\Carbon::parse($appointment->end_date)->format('h:i A') }}</p>
                                 @endif
                         </a>
                         <!-- If there are no upcoming appointments -->
