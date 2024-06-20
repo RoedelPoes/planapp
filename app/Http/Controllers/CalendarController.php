@@ -22,6 +22,8 @@ class CalendarController extends Controller
                 'title' => $booking->title,
                 'start' => $booking->start_date,
                 'end' => $booking->end_date,
+                'color' => $booking->color,
+                'textColor' => 'black',
             ];
         }
 
@@ -37,6 +39,7 @@ class CalendarController extends Controller
             'title' => 'required|string|max:30',
             'start_date' => 'required|date',
             'end_date' => 'required|date',
+            'color' => 'required|string',
         ]);
 
         $booking = Booking::create([
@@ -44,6 +47,7 @@ class CalendarController extends Controller
             'start_date' => $request->start_date,
             'end_date' => $request->end_date,
             'user_id' => Auth::id(),
+            'color' => $request->color,
         ]);
 
         return response()->json([
@@ -51,6 +55,7 @@ class CalendarController extends Controller
             'start' => $booking->start_date,
             'end' => $booking->end_date,
             'title' => $booking->title,
+            'color' => $booking->color,
         ]);
     }
 
@@ -71,9 +76,10 @@ class CalendarController extends Controller
 
         // Validate the request data for the specific scenario
         $validatedData = $request->validate([
-            'title' => 'sometimes|string|max:30', // 'sometimes' allows for partial updates
-            'start_date' => 'required|date_format:Y-m-d H:i:s', // Requires full update of start_date
-            'end_date' => 'required|date_format:Y-m-d H:i:s', // Requires full update of end_date
+            'title' => 'sometimes|string|max:30',
+            'start_date' => 'required|date_format:Y-m-d H:i:s',
+            'end_date' => 'required|date_format:Y-m-d H:i:s',
+            'color' => 'sometimes|string',
         ]);
 
         // Prepare data for update
@@ -87,6 +93,10 @@ class CalendarController extends Controller
             $updateData['title'] = $validatedData['title'];
         }
 
+        if (isset($validatedData['color'])) {
+            $updateData['color'] = $validatedData['color'];
+        }
+
         // Update the booking record
         $booking->update($updateData);
 
@@ -95,6 +105,7 @@ class CalendarController extends Controller
             'title' => $booking->title,
             'start' => $booking->start_date,
             'end' => $booking->end_date,
+            'color' => $booking->color,
         ]);
     }
     /**

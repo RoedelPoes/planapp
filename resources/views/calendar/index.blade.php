@@ -22,10 +22,15 @@
     <style>
         .fc-title,
         .fc-day-number,
-        .fc-event-title,
         .fc-event-time,
         .fc-day-header {
             color: white !important;
+        }
+
+
+        .fc-event-title,
+        .fc-title {
+            color: black !important;
         }
 
         .fc-today {
@@ -88,6 +93,40 @@
     <div id="bookingModal" class="fixed inset-0 z-50 flex items-center justify-center hidden bg-gray-900 bg-opacity-75">
         <div class="bg-gray-800 rounded-lg overflow-hidden shadow-xl transform transition-all sm:max-w-lg sm:w-full">
             <div class="bg-gray-700 px-4 py-4">
+
+                <div id="Radio-buttons" class="flex bg-gray-700 w-full gap-5 mt-5 mb-5">
+                    <div class="flex ">
+                        <input type="radio" id="cyan-tag" name="color-radio" value="#22d3ee" class="hidden peer"
+                            checked="checked" />
+                        <label for="cyan-tag"
+                            class="h-min font-semibold text-sm py-1 px-6 bg-transparent text-white border border-2 border-gray-200 rounded-lg cursor-pointer peer-checked:border-cyan-400 peer-checked:text-cyan-400 hover:text-gray-600 hover:bg-gray-900">
+                            Cyan
+                        </label>
+                    </div>
+                    <div class="flex">
+                        <input type="radio" id="green-tag" name="color-radio" value="#4ade80" class="hidden peer" />
+                        <label for="green-tag"
+                            class="h-min font-semibold text-sm py-1 px-6 bg-transparent text-white border border-2 border-gray-200 rounded-lg cursor-pointer peer-checked:border-green-500 peer-checked:text-green-500 hover:text-gray-600 hover:bg-gray-900">
+                            Green
+                        </label>
+                    </div>
+                    <div class="flex">
+                        <input type="radio" id="yellow-tag" name="color-radio" value="#facc15" class="hidden peer" />
+                        <label for="yellow-tag"
+                            class="h-min font-semibold text-sm py-1 px-6 bg-transparent text-white border border-2 border-gray-200 rounded-lg cursor-pointer peer-checked:border-yellow-500 peer-checked:text-yellow-500 hover:text-gray-600 hover:bg-gray-900">
+                            Yellow
+                        </label>
+                    </div>
+                    <div class="flex">
+                        <input type="radio" id="purple-tag" name="color-radio" value="#c084fc" class="hidden peer" />
+                        <label for="purple-tag"
+                            class="h-min font-semibold text-sm py-1 px-6 bg-transparent text-white border border-2 border-gray-200 rounded-lg cursor-pointer peer-checked:border-purple-500 peer-checked:text-purple-500 hover:text-gray-600 hover:bg-gray-900">
+                            Purple
+                        </label>
+                    </div>
+                </div>
+
+
                 <label for="title" class="text-white m-2 mt-2 block">Title</label>
                 <span id="titleError" class="text-red-500 w-full block"></span>
                 <input type="text"
@@ -134,6 +173,41 @@
     <div id="editModal" class="fixed inset-0 z-50 flex items-center justify-center hidden bg-gray-900 bg-opacity-75">
         <div class="bg-gray-800 rounded-lg overflow-hidden shadow-xl transform transition-all sm:max-w-lg sm:w-full">
             <div class="bg-gray-700 px-4 py-4">
+                <label class="text-white mt-2 ml-2 block">Choose a color:</label>
+                <div id="editRadio-buttons" class="flex bg-gray-700 w-full mt-5 mb-5  gap-5">
+                    <div class="flex ">
+                        <input type="radio" id="edit-cyan-tag" name="edit-color-radio" value="#22d3ee"
+                            class="hidden peer" checked="checked" />
+                        <label for="edit-cyan-tag"
+                            class="h-min font-semibold text-sm py-1 px-6 bg-transparent text-white border border-2 border-gray-200 rounded-lg cursor-pointer peer-checked:border-cyan-400 peer-checked:text-cyan-400 hover:text-gray-600 hover:bg-gray-900">
+                            Cyan
+                        </label>
+                    </div>
+                    <div class="flex">
+                        <input type="radio" id="edit-green-tag" name="edit-color-radio" value="#4ade80"
+                            class="hidden peer" />
+                        <label for="edit-green-tag"
+                            class="h-min font-semibold text-sm py-1 px-6 bg-transparent text-white border border-2 border-gray-200 rounded-lg cursor-pointer peer-checked:border-green-500 peer-checked:text-green-500 hover:text-gray-600 hover:bg-gray-900">
+                            Green
+                        </label>
+                    </div>
+                    <div class="flex">
+                        <input type="radio" id="edit-yellow-tag" name="edit-color-radio" value="#facc15"
+                            class="hidden peer" />
+                        <label for="edit-yellow-tag"
+                            class="h-min font-semibold text-sm py-1 px-6 bg-transparent text-white border border-2 border-gray-200 rounded-lg cursor-pointer peer-checked:border-yellow-500 peer-checked:text-yellow-500 hover:text-gray-600 hover:bg-gray-900">
+                            Yellow
+                        </label>
+                    </div>
+                    <div class="flex">
+                        <input type="radio" id="edit-purple-tag" name="edit-color-radio" value="#c084fc"
+                            class="hidden peer" />
+                        <label for="edit-purple-tag"
+                            class="h-min font-semibold text-sm py-1 px-6 bg-transparent text-white border border-2 border-gray-200 rounded-lg cursor-pointer peer-checked:border-purple-500 peer-checked:text-purple-500 hover:text-gray-600 hover:bg-gray-900">
+                            Purple
+                        </label>
+                    </div>
+                </div>
                 <label for="editTitle" class="text-white m-2 mt-4 block">Edit Title</label>
                 <span id="editTitleError" class="text-red-500 w-full block"></span>
                 <input type="text"
@@ -244,6 +318,7 @@
 
             // Get events from controller
             var booking = @json($events);
+            console.log(booking);
 
             // Initialize fullCalendar
             $('#calendar').fullCalendar({
@@ -292,6 +367,7 @@
                         var start_time = $('#start_time').val();
                         var end_time = $('#end_time').val();
                         var date = moment(start).format('YYYY-MM-DD');
+                        var color = $('input[name="color-radio"]:checked').val();
 
 
                         // Determine if it's an all-day event
@@ -301,7 +377,6 @@
                         // Set start and end times
                         if (isAllDay) {
                             // For all-day events, set start and end times to whole day
-                            console.log('All day event');
                             start_datetime = moment(start).startOf('day').format(
                                 'YYYY-MM-DD HH:mm:ss');
                             end_datetime = moment(start).endOf('day').format(
@@ -328,7 +403,8 @@
                             data: {
                                 title: title,
                                 start_date: start_datetime,
-                                end_date: end_datetime
+                                end_date: end_datetime,
+                                color: color
                             },
                             // If successful, close modal and reload page
                             success: function(response) {
@@ -338,7 +414,8 @@
                             // If error, display error message
                             error: function(error) {
                                 if (error.responseJSON.errors.title) {
-                                $('#titleError').text(error.responseJSON.errors.title[0]);
+                                    $('#titleError').text(error.responseJSON.errors
+                                        .title[0]);
                                 }
                             },
                         });
@@ -374,10 +451,11 @@
                 eventClick: function(event) {
                     var id = event.id;
                     var title = event.title;
-                    var start_date = moment(event.start).format('YYYY-MM-DD HH:mm:ss');
-                    var end_date = moment(event.end).format('YYYY-MM-DD HH:mm:ss');
+                    var start_date = moment(event.start).format('YYYY-MM-DD HH:mm');
+                    var end_date = moment(event.end).format('YYYY-MM-DD HH:mm');
+                    var color = event.color;
 
-                   
+
                     // Show the edit modal
                     $('#editModal').removeClass('hidden');
 
@@ -386,14 +464,16 @@
                     $('#editAllDay').prop('checked', event.allDay);
                     $('#editStartTime').val(start_date);
                     $('#editEndTime').val(end_date);
+                    $('input[name="edit-color-radio"][value="' + color + '"]').prop('checked', true);
 
                     // Handle Save button click
                     $('#saveEditBtn').off('click').on('click', function() {
-                        console.log('Save button clicked')
                         var updatedTitle = $('#editTitle').val();
                         var updatedStartTime = $('#editStartTime').val().replace('T', ' ') +
                             ':00';
                         var updatedEndTime = $('#editEndTime').val().replace('T', ' ') + ':00';
+                        var updatedColor = $('input[name="edit-color-radio"]:checked').val();
+                        console.log(updatedColor);
 
                         // Update event via AJAX
                         $.ajax({
@@ -404,6 +484,7 @@
                                 title: updatedTitle,
                                 start_date: updatedStartTime,
                                 end_date: updatedEndTime,
+                                color: updatedColor,
                             },
                             success: function(response) {
                                 closeEditModal();
@@ -412,7 +493,8 @@
                             error: function(error) {
                                 console.log(error);
                                 if (error.responseJSON.errors.title) {
-                                    $('#editTitleError').text(error.responseJSON.errors.title[0]);
+                                    $('#editTitleError').text(error.responseJSON
+                                        .errors.title[0]);
                                 }
                             }
                         });
@@ -474,6 +556,17 @@
                     return moment(event.start).utcOffset(false).isSame(moment(event.end).subtract(1,
                         'second').utcOffset(false), 'day');
                 },
+                eventRender: function(event, element) {
+                    var startTime = event.start.format('HH:mm');
+                    var endTime = event.end.format('HH:mm');
+
+                    if (startTime === '00:00' && endTime === '23:59') {
+                        element.find('.fc-time').text('All Day');
+                    } else {
+                        element.find('.fc-time').html('<span class="fc-time">' + startTime + ' - ' +
+                            endTime + '</span>');
+                    }
+                }
 
             });
 
