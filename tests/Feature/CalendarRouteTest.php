@@ -22,6 +22,7 @@ test('calendar index route returns view with events when authenticated', functio
         'title' => 'Test Event',
         'start_date' => '2024-06-20 10:00:00',
         'end_date' => '2024-06-20 12:00:00',
+        'color' => '#000000',
     ]);
 
     $response = $this->get('/calendar');
@@ -44,6 +45,7 @@ test('calendar store route creates booking when authenticated', function () {
         'title' => 'Test Event',
         'start_date' => '2024-06-20 10:00:00',
         'end_date' => '2024-06-20 12:00:00',
+        'color' => '#000000',
     ]);
 
     $response->assertStatus(200);
@@ -51,6 +53,7 @@ test('calendar store route creates booking when authenticated', function () {
         'title' => 'Test Event',
         'start_date' => '2024-06-20 10:00:00',
         'end_date' => '2024-06-20 12:00:00',
+        'color' => '#000000',
         'user_id' => $user->id,
     ]);
 });
@@ -73,6 +76,7 @@ test('calendar update route updates booking when authenticated', function () {
         'title' => 'Updated Event',
         'start_date' => '2024-06-21 10:00:00',
         'end_date' => '2024-06-21 12:00:00',
+        'color' => '#000000',
     ]);
 
     $response->assertStatus(200);
@@ -81,6 +85,7 @@ test('calendar update route updates booking when authenticated', function () {
         'title' => 'Updated Event',
         'start_date' => '2024-06-21 10:00:00',
         'end_date' => '2024-06-21 12:00:00',
+        'color' => '#000000',
     ]);
 });
 

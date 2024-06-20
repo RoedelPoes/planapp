@@ -27,6 +27,7 @@ class BookingFactory extends Factory
             'title' => $this->faker->sentence(3),
             'start_date' => $startDate,
             'end_date' => $endDate,
+            'color' => $this->faker->hexColor(),
             'user_id' => User::factory(),
         ];
     }
