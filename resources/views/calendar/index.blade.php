@@ -76,7 +76,7 @@
 
         /* Input icons styling */
         input[type="time"]::-webkit-calendar-picker-indicator,
-        input[type="datetime-local"]::-webkit-calendar-picker-indicator{
+        input[type="datetime-local"]::-webkit-calendar-picker-indicator {
             filter: invert(100%) grayscale(100%);
         }
     </style>
@@ -87,7 +87,7 @@
     <!-- Insert Modal -->
     <div id="bookingModal" class="fixed inset-0 z-50 flex items-center justify-center hidden bg-gray-900 bg-opacity-75">
         <div class="bg-gray-800 rounded-lg overflow-hidden shadow-xl transform transition-all sm:max-w-lg sm:w-full">
-            <div class="bg-gray-700 px-4 py-4"> 
+            <div class="bg-gray-700 px-4 py-4">
                 <label for="title" class="text-white m-2 mt-2 block">Title</label>
                 <span id="titleError" class="text-red-500 w-full block"></span>
                 <input type="text"
@@ -292,7 +292,7 @@
                         var start_time = $('#start_time').val();
                         var end_time = $('#end_time').val();
                         var date = moment(start).format('YYYY-MM-DD');
-                        //var color = $('input[name=color-radio]:checked').val();
+
 
                         // Determine if it's an all-day event
                         var isAllDay = $('#all_day').prop('checked');
@@ -337,9 +337,8 @@
                             },
                             // If error, display error message
                             error: function(error) {
-                                if (error.responseJSON.errors) {
-                                    $('#titleError').html(error.responseJSON.errors
-                                        .title);
+                                if (error.responseJSON.errors.title) {
+                                $('#titleError').text(error.responseJSON.errors.title[0]);
                                 }
                             },
                         });
@@ -378,6 +377,7 @@
                     var start_date = moment(event.start).format('YYYY-MM-DD HH:mm:ss');
                     var end_date = moment(event.end).format('YYYY-MM-DD HH:mm:ss');
 
+                   
                     // Show the edit modal
                     $('#editModal').removeClass('hidden');
 
@@ -389,6 +389,7 @@
 
                     // Handle Save button click
                     $('#saveEditBtn').off('click').on('click', function() {
+                        console.log('Save button clicked')
                         var updatedTitle = $('#editTitle').val();
                         var updatedStartTime = $('#editStartTime').val().replace('T', ' ') +
                             ':00';
@@ -465,8 +466,6 @@
                         },
                     });
                 },
-
-
                 // Prevent selection of multiple days
                 selectAllow: function(event) {
                     return moment(event.start).utcOffset(false).isSame(moment(event.end).subtract(1,
@@ -481,6 +480,7 @@
                 $('#saveBtn').off('click');
             }
 
+            // Close edit modal
             function closeEditModal() {
                 $('#editModal').addClass('hidden');
                 $('#saveEditBtn').off('click');

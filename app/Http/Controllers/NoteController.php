@@ -36,8 +36,8 @@ class NoteController extends Controller
     {
         //
         $validatedData = $request->validate([
-            'title' => 'required|string|max:255',
-            'content' => 'required|string',
+            'title' => 'required|string|max:30',
+            'content' => 'required|string|max:999',
             'tagColor' => 'required|string', // Takes tailwind color classes
         ]);
 
@@ -64,8 +64,8 @@ class NoteController extends Controller
         $note = Note::where('user_id', Auth::id())->find($id);
 
         $validatedData = $request->validate([
-            'title' => 'required|string|max:255',
-            'content' => 'required|string',
+            'title' => 'required|string|max:30',
+            'content' => 'required|string|max:999',
             'tagColor' => 'required|string', // Takes tailwind color classes
         ]);
 

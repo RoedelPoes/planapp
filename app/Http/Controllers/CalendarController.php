@@ -34,7 +34,7 @@ class CalendarController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title' => 'required|string',
+            'title' => 'required|string|max:30',
             'start_date' => 'required|date',
             'end_date' => 'required|date',
         ]);
@@ -71,7 +71,7 @@ class CalendarController extends Controller
 
         // Validate the request data for the specific scenario
         $validatedData = $request->validate([
-            'title' => 'sometimes|string|max:255', // 'sometimes' allows for partial updates
+            'title' => 'sometimes|string|max:30', // 'sometimes' allows for partial updates
             'start_date' => 'required|date_format:Y-m-d H:i:s', // Requires full update of start_date
             'end_date' => 'required|date_format:Y-m-d H:i:s', // Requires full update of end_date
         ]);
