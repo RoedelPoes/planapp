@@ -30,8 +30,10 @@
             @csrf
             <div class="bg-gray-700 px-4 py-4">
                 <select name="tagColor">
-                    <option value="red">red</option>
+                    <option value="fuschia">fusje</option>
                     <option value="green">green</option>
+                    <option value="yellow">yellow</option>
+                    <option value="purple">purple</option>
                 </select>
                 <label for="title" class="text-white m-2 mt-2 block">Task</label>
                 @if ($errors->any())
