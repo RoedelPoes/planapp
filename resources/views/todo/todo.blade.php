@@ -75,11 +75,13 @@
                     </svg>
                     <span>New task</span>
                 </button>
-                <div class="h-auto w-full rounded mt-5 py-4">
-                    <h2 class="ml-6 mb-2 pb-0 text-white text-2xl">Todays tasks:</h2>
+                <div class="h-auto w-full rounded py-4">
+
+                    @if ($missedTodos->isNotEmpty())
+                    <h2 class="mt-10 ml-6 mb-2 pb-0 text-white text-2xl">Missed tasks:</h2>
                     <ul class="list-disc list-inside">
-                        @foreach ($todos as $todo)
-                        <li class="flex items-center justify-between p-2 border border-gray-300 rounded-md mt-2 md-2 ">
+                        @foreach ($missedTodos as $todo)
+                        <li class="flex items-center justify-between p-2 bg-gray-800 border border-red-700 rounded-md mt-2 md-2 ">
                             <form action="/todo/complete/{{ $todo->id }}" method="POST" class="flex items-center">
                                 @csrf
                                 <input type="checkbox" {{ $todo->completed ? 'checked' : '' }} onclick="this.form.submit()" class="rounded dark:bg-gray-900 border-gray-300 dark:border-gray-700 text-pink-600 shadow-sm focus:ring-pink-500 dark:focus:ring-pink-600 dark:focus:ring-offset-gray-800">
@@ -90,6 +92,45 @@
                                 <button type="submit" class="text-red-500 hover:text-red-700">Remove</button>
                             </form>
                         </li>
+                        @endforeach
+                    </ul>
+                    @endif
+
+                    <h2 class="mt-10 ml-6 mb-2 pb-0 text-white text-2xl">Todays tasks:</h2>
+                    <ul class="list-disc list-inside">
+                        @foreach ($todos as $todo)
+                        @if ($todo['date'] == $currentDay)
+                        <li class="flex items-center justify-between p-2 bg-gray-800 border {{ $todo->completed ? 'border-gray-500' : 'border-gray-300' }} rounded-md mt-2 md-2 ">
+                            <form action="/todo/complete/{{ $todo->id }}" method="POST" class="flex items-center">
+                                @csrf
+                                <input type="checkbox" {{ $todo->completed ? 'checked' : '' }} onclick="this.form.submit()" class="rounded dark:bg-gray-900 border-gray-300 dark:border-gray-700 text-pink-600 shadow-sm focus:ring-pink-500 dark:focus:ring-pink-600 dark:focus:ring-offset-gray-800">
+                            </form>
+                            <span class="{{ $todo->completed ? 'line-through text-gray-400' : 'text-white' }}">{{ $todo->title }}</span>
+                            <form action="/todo/destroy/{{ $todo->id }}" method="POST">
+                                @csrf
+                                <button type="submit" class="text-red-500 hover:text-red-700">Remove</button>
+                            </form>
+                        </li>
+                        @endif
+                        @endforeach
+                    </ul>
+
+                    <h2 class="mt-10 ml-6 mb-2 pb-0 text-white text-2xl">Upcoming tasks:</h2>
+                    <ul class="list-disc list-inside">
+                        @foreach ($todos as $todo)
+                        @if ($todo['date'] > $currentDay)
+                        <li class="flex items-center justify-between p-2 bg-gray-800 border {{ $todo->completed ? 'border-gray-500' : 'border-gray-300' }} rounded-md mt-2 md-2 ">
+                            <form action="/todo/complete/{{ $todo->id }}" method="POST" class="flex items-center">
+                                @csrf
+                                <input type="checkbox" {{ $todo->completed ? 'checked' : '' }} onclick="this.form.submit()" class="rounded dark:bg-gray-900 border-gray-300 dark:border-gray-700 text-pink-600 shadow-sm focus:ring-pink-500 dark:focus:ring-pink-600 dark:focus:ring-offset-gray-800">
+                            </form>
+                            <span class="{{ $todo->completed ? 'line-through text-gray-400' : 'text-white' }}">{{ $todo->title }}</span>
+                            <form action="/todo/destroy/{{ $todo->id }}" method="POST">
+                                @csrf
+                                <button type="submit" class="text-red-500 hover:text-red-700">Remove</button>
+                            </form>
+                        </li>
+                        @endif
                         @endforeach
                     </ul>
                 </div>

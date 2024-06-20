@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Todo;
 use Illuminate\Console\View\Components\Alert;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -11,9 +12,15 @@ class TodoController extends Controller
 {
     public function index()
     {
-        $todos = Todo::where('user_id', Auth::id())->get();
+        $currentDay = Carbon::now()->format('Y-m-d') . ' 00:00:00';
 
-        return view('todo.todo')->with(['todos' => $todos]);
+        $todos = Todo::where('user_id', Auth::id())->orderBy('date')->get();
+
+        $missedTodos = Todo::where('user_id', Auth::id())
+        ->where('date', '<', $currentDay)
+        ->where('completed', '0')->get();
+
+        return view('todo.todo')->with(['todos' => $todos, 'currentDay' => $currentDay, 'missedTodos' => $missedTodos]);
     }
 
     /**
@@ -49,8 +56,13 @@ class TodoController extends Controller
     {
         $todo = Todo::where('user_id', Auth::id())->find($id);
 
-        $completed = ['completed' => 1];
-        $todo->update(['completed' => 1]);
+        if ($todo['completed'] == 1) {
+            $completed = ['completed' => 0];
+        } else {
+            $completed = ['completed' => 1];
+        }
+
+        $todo->update($completed);
 
         return redirect()->route('todo');
     }
