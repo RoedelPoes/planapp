@@ -30,7 +30,7 @@
             @csrf
             <div class="bg-gray-700 px-4 py-4">
                 <select name="tagColor">
-                    <option value="fuschia">fusje</option>
+                    <option value="fuchsia">fusje</option>
                     <option value="green">green</option>
                     <option value="yellow">yellow</option>
                     <option value="purple">purple</option>
