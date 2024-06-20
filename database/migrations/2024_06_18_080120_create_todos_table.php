@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('title');
             $table->datetime('date');
             $table->boolean('completed');
+            $table->string('tagColor');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });

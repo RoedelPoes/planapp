@@ -13,6 +13,7 @@ class Todo extends Model
         'title',
         'date',
         'completed',
+        'tagColor',
         'user_id',
     ];
 

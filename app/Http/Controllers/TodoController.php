@@ -37,6 +37,7 @@ class TodoController extends Controller
             'title' => $request->title,
             'date' => $request->date,
             'completed' => 0,
+            'tagColor' => $request->tagColor,
             'user_id' => Auth::id(),
         ]);
 
