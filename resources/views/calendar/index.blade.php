@@ -20,6 +20,38 @@
 
     <!-- FullCalendar styling -->
     <style>
+        .fc-unthemed th,
+        .fc-unthemed td,
+        .fc-unthemed thead,
+        .fc-unthemed tbody,
+        .fc-unthemed .fc-divider,
+        .fc-unthemed .fc-row,
+        .fc-unthemed .fc-content,
+        .fc-unthemed .fc-popover,
+        .fc-unthemed .fc-list-view,
+        .fc-unthemed .fc-list-heading td {
+            border-color: #212b38;
+        }
+
+        .fc th, .fc td{
+            border-width: 2px;
+        }
+
+        .fc-day-header {
+            background-color: #212b38;
+        }
+
+        .fc-day {
+            background-color: #4b5563;
+        }
+
+        .fc-center>h2 {
+            font-size: 1.5em;
+        }
+        .fc-unthemed td.fc-today{
+            background-color: #4b5563;
+        }
+        
         .fc-title,
         .fc-day-number,
         .fc-event-time,
@@ -33,8 +65,8 @@
             color: black !important;
         }
 
-        .fc-today {
-            background-color: #f472b569 !important;
+        .fc-day-top.fc-today{
+            background-color: rgba(244, 114, 181, 0.776) !important;
         }
 
         .fc-state-default {
@@ -269,27 +301,27 @@
                             <input type="radio" name="color-filter" id="color-filter-all" value="all" checked
                                 class="hidden peer/all">
                             <label for="color-filter-all"
-                                class="cursor-pointer py-2 px-4 bg-gray-600 rounded-t-xl peer-checked/all:bg-gray-500">All</label>
+                                class="cursor-pointer py-2 px-4 bg-slate-800 rounded-t-xl peer-checked/all:bg-slate-500">All</label>
 
                             <input type="radio" name="color-filter" id="color-filter-cyan" value="cyan"
                                 class="hidden peer/cyan">
                             <label for="color-filter-cyan"
-                                class="cursor-pointer py-2 px-4 bg-gray-600  peer-checked/cyan:bg-gray-500">Cyan</label>
+                                class="cursor-pointer py-2 px-4 bg-slate-800  peer-checked/cyan:bg-slate-500">Cyan</label>
 
                             <input type="radio" name="color-filter" id="color-filter-green" value="green"
                                 class="hidden peer/green">
                             <label for="color-filter-green"
-                                class="cursor-pointer py-2 px-4 bg-gray-600  peer-checked/green:bg-gray-500">Green</label>
+                                class="cursor-pointer py-2 px-4 bg-slate-800  peer-checked/green:bg-slate-500">Green</label>
 
                             <input type="radio" name="color-filter" id="color-filter-yellow" value="yellow"
                                 class="hidden peer/yellow">
                             <label for="color-filter-yellow"
-                                class="cursor-pointer py-2 px-4 bg-gray-600  peer-checked/yellow:bg-gray-500">Yellow</label>
+                                class="cursor-pointer py-2 px-4 bg-slate-800  peer-checked/yellow:bg-slate-500">Yellow</label>
 
                             <input type="radio" name="color-filter" id="color-filter-purple" value="purple"
                                 class="hidden peer/purple">
                             <label for="color-filter-purple"
-                                class="cursor-pointer py-2 px-4 bg-gray-600 rounded-b-xl peer-checked/purple:bg-gray-500">Purple</label>
+                                class="cursor-pointer py-2 px-4 bg-slate-800 rounded-b-xl peer-checked/purple:bg-slate-500">Purple</label>
                         </form>
                     </div>
 
@@ -314,8 +346,8 @@
             $('#colorFilterForm').removeClass('hidden');
         });
 
-         //set radio button on load
-         $(document).ready(function() {
+        //set radio button on load
+        $(document).ready(function() {
             //get color from url
             var color = new URLSearchParams(window.location.search).get('color-filter');
             if (color == 'all') {
@@ -324,9 +356,6 @@
                 $('#color-filter-' + color).prop('checked', true);
             }
         });
-
-
-
 
         // Function to show booking modal
         function showBookingModal() {
@@ -404,7 +433,6 @@
                 nowIndicator: true, // Show current time indicator
                 allDaySlot: false, // Hide all-day slot
                 timeFormat: 'H:mm', // Time format
-                eventColor: '#f472b5', // Event color
                 slotEventOverlap: false, // Prevent overlapping events, put them side by side
                 // Add event
                 select: function(start, end, allDays) {
