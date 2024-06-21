@@ -12,10 +12,33 @@ class CalendarController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         $events = array();
-        $bookings = Booking::where('user_id', Auth::id())->get();
+        $colorFilter = $request->input('color-filter');
+
+        $bookings = Booking::when($colorFilter && $colorFilter !== 'all', function ($query) use ($colorFilter) {
+            switch ($colorFilter) {
+                case 'cyan':
+                    $colorFilter = '#22d3ee';
+                    break;
+                case 'green':
+                    $colorFilter = '#4ade80';
+                    break;
+                case 'yellow':
+                    $colorFilter = '#4ade80';
+                    break;
+                case 'purple':
+                    $colorFilter = '#c084fc';
+                    break;
+                default:
+                    $colorFilter = 'all';
+                    break;
+            }
+            return $query->where('color', $colorFilter);
+        })->where('user_id', Auth::id())->get();
+
+
         foreach ($bookings as $booking) {
             $events[] = [
                 'id'   => $booking->id,
@@ -27,7 +50,8 @@ class CalendarController extends Controller
             ];
         }
 
-        return view('calendar.index', ['events' => $events]);
+    
+        return view('calendar.index', ['events' => $events, 'name' => auth()->user()->name,]);
     }
 
     /**

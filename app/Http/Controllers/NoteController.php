@@ -15,8 +15,6 @@ class NoteController extends Controller
     public function index(Request $request)
     {
         //
-        //$notes = Note::where('user_id', Auth::id());
-
         $colorFilter = $request->input('color-filter');
 
         // Query notes based on the selected color filter

@@ -386,10 +386,13 @@
         //set radio button on load
         $(document).ready(function() {
             //get color from url
+            console.log(color);
             var color = new URLSearchParams(window.location.search).get('color-filter');
             if (color == 'all') {
+                console.log(color);
                 $('#color-filter-all').prop('checked', true);
             } else {
+                console.log(color);
                 $('#color-filter-' + color).prop('checked', true);
             }
         });

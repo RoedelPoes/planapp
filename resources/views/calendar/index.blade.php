@@ -255,6 +255,46 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="flex justify-between mb-10">
+                <h1 class="text-2xl text-gray-500">Hello <span class="text-white">{{ $name }}</span> here is
+                    your calendar,</h1>
+                <div class="flex gap-10">
+                    <div class="flex flex-col">
+                        <button class="text-l px-4 py-2 rounded  cursor-pointer hover:underline text-white"
+                            id="filterBtn">Filter</button>
+
+                        <!-- Filter Modal -->
+                        <form id="colorFilterForm" action="{{ route('calendar') }}" method="GET"
+                            class="flex flex-col w-20 text-center z-50 absolute hidden text-white">
+                            <input type="radio" name="color-filter" id="color-filter-all" value="all" checked
+                                class="hidden peer/all">
+                            <label for="color-filter-all"
+                                class="cursor-pointer py-2 px-4 bg-gray-600 rounded-t-xl peer-checked/all:bg-gray-500">All</label>
+
+                            <input type="radio" name="color-filter" id="color-filter-cyan" value="cyan"
+                                class="hidden peer/cyan">
+                            <label for="color-filter-cyan"
+                                class="cursor-pointer py-2 px-4 bg-gray-600  peer-checked/cyan:bg-gray-500">Cyan</label>
+
+                            <input type="radio" name="color-filter" id="color-filter-green" value="green"
+                                class="hidden peer/green">
+                            <label for="color-filter-green"
+                                class="cursor-pointer py-2 px-4 bg-gray-600  peer-checked/green:bg-gray-500">Green</label>
+
+                            <input type="radio" name="color-filter" id="color-filter-yellow" value="yellow"
+                                class="hidden peer/yellow">
+                            <label for="color-filter-yellow"
+                                class="cursor-pointer py-2 px-4 bg-gray-600  peer-checked/yellow:bg-gray-500">Yellow</label>
+
+                            <input type="radio" name="color-filter" id="color-filter-purple" value="purple"
+                                class="hidden peer/purple">
+                            <label for="color-filter-purple"
+                                class="cursor-pointer py-2 px-4 bg-gray-600 rounded-b-xl peer-checked/purple:bg-gray-500">Purple</label>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
             <div class="flex justify-center">
                 <div id='calendar' class="text-white">
                     <!-- Calendar will be displayed here -->
@@ -264,6 +304,30 @@
     </div>
 
     <script>
+        //Set filter on change
+        $('#colorFilterForm').on('change', function() {
+            $('#colorFilterForm').submit();
+        });
+
+        //Open filter modal
+        $('#filterBtn').click(function() {
+            $('#colorFilterForm').removeClass('hidden');
+        });
+
+         //set radio button on load
+         $(document).ready(function() {
+            //get color from url
+            var color = new URLSearchParams(window.location.search).get('color-filter');
+            if (color == 'all') {
+                $('#color-filter-all').prop('checked', true);
+            } else {
+                $('#color-filter-' + color).prop('checked', true);
+            }
+        });
+
+
+
+
         // Function to show booking modal
         function showBookingModal() {
             $('#bookingModal').removeClass('hidden');
@@ -318,7 +382,7 @@
 
             // Get events from controller
             var booking = @json($events);
-            console.log(booking);
+
 
             // Initialize fullCalendar
             $('#calendar').fullCalendar({
@@ -473,7 +537,6 @@
                             ':00';
                         var updatedEndTime = $('#editEndTime').val().replace('T', ' ') + ':00';
                         var updatedColor = $('input[name="edit-color-radio"]:checked').val();
-                        console.log(updatedColor);
 
                         // Update event via AJAX
                         $.ajax({
