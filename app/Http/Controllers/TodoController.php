@@ -35,7 +35,7 @@ class TodoController extends Controller
     {
         $request->validate([
             'title' => 'required|string|max:100',
-            'date' => 'required|date',
+            'date' => 'required|date|before:31-12-9999',
         ]);
 
         Todo::create([
