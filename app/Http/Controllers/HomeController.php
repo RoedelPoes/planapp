@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Booking;
+use App\Models\Todo;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -19,7 +20,11 @@ class HomeController extends Controller
         ->orderBy('start_date')
         ->limit(3) 
         ->get();
+
+        $todoDay = Carbon::now()->format('Y-m-d') . ' 00:00:00';
+        $todaysTodos = Todo::where('user_id', Auth::id())
+        ->where('date', '=', $todoDay)->get();
         
-        return view('welcome')->with(['currentDay' => $currentDay, 'name' => auth()->user()->name, 'upcomingAppointments' => $upcomingAppointments]);
+        return view('welcome')->with(['currentDay' => $currentDay, 'name' => auth()->user()->name, 'upcomingAppointments' => $upcomingAppointments, 'todaysTodos' => $todaysTodos]);
     }
 }
