@@ -73,7 +73,7 @@ test('todo update route updates todo when authenticated', function () {
         'completed' => '1'
     ]);
 
-    //$response->assertStatus(200);
+    $response->assertStatus(302);
     $this->assertDatabaseHas('todos', [
         'id' => $todo->id,
         'completed' => '1',
@@ -96,6 +96,6 @@ test('todo destroy route deletes todo when authenticated', function () {
 
     $response = $this->delete("/todo/destroy/{$todo->id}");
 
-    //$response->assertStatus(200);
+    $response->assertStatus(302);
     $this->assertDatabaseMissing('todos', ['id' => $todo->id]);
 });
