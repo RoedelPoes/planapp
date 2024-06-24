@@ -29,24 +29,39 @@
         <form action="{{ route('todo.store') }}" method="post" class="bg-gray-800 rounded-lg overflow-hidden shadow-xl transform transition-all sm:max-w-lg sm:w-full">
             @csrf
             <div class="bg-gray-700 px-4 py-4">
-                <div class="flex w-full justify-between">
-                    <div class="flex flex-col content-center">
-                        <label for="tagColor" class="text-center text-white">Cyan</label>
-                        <input type="radio" name="tagColor" value="cyan" class="w-24 h-10 rounded-lg bg-cyan-400">
+
+                <div id="Radio-buttons" class="flex bg-gray-700 w-full gap-5 mt-5 mb-5">
+                    <div class="flex ">
+                        <input type="radio" id="cyan-tag" name="tagColor" value="cyan" class="hidden peer"
+                            checked="checked" />
+                        <label for="cyan-tag"
+                            class="h-min font-semibold text-sm py-1 px-6 bg-transparent text-white border border-2 border-gray-200 rounded-lg cursor-pointer peer-checked:border-cyan-400 peer-checked:text-cyan-400 hover:text-gray-600 hover:bg-gray-900">
+                            Cyan
+                        </label>
                     </div>
-                    <div class="flex flex-col content-center">
-                        <label for="tagColor" class="text-center text-white">Green</label>
-                        <input type="radio" name="tagColor" value="green" class="w-24 h-10 rounded-lg bg-green-400">
+                    <div class="flex">
+                        <input type="radio" id="green-tag" name="tagColor" value="green" class="hidden peer" />
+                        <label for="green-tag"
+                            class="h-min font-semibold text-sm py-1 px-6 bg-transparent text-white border border-2 border-gray-200 rounded-lg cursor-pointer peer-checked:border-green-500 peer-checked:text-green-500 hover:text-gray-600 hover:bg-gray-900">
+                            Green
+                        </label>
                     </div>
-                    <div class="flex flex-col content-center">
-                        <label for="tagColor" class="text-center text-white">Yellow</label>
-                        <input type="radio" name="tagColor" value="yellow" class="w-24 h-10 rounded-lg bg-yellow-400">
+                    <div class="flex">
+                        <input type="radio" id="yellow-tag" name="tagColor" value="yellow" class="hidden peer" />
+                        <label for="yellow-tag"
+                            class="h-min font-semibold text-sm py-1 px-6 bg-transparent text-white border border-2 border-gray-200 rounded-lg cursor-pointer peer-checked:border-yellow-500 peer-checked:text-yellow-500 hover:text-gray-600 hover:bg-gray-900">
+                            Yellow
+                        </label>
                     </div>
-                    <div class="flex flex-col content-center">
-                        <label for="tagColor" class="text-center text-white">Purple</label>
-                        <input type="radio" name="tagColor" value="purple" class="w-24 h-10 rounded-lg bg-purple-400">
+                    <div class="flex">
+                        <input type="radio" id="purple-tag" name="tagColor" value="purple" class="hidden peer" />
+                        <label for="purple-tag"
+                            class="h-min font-semibold text-sm py-1 px-6 bg-transparent text-white border border-2 border-gray-200 rounded-lg cursor-pointer peer-checked:border-purple-500 peer-checked:text-purple-500 hover:text-gray-600 hover:bg-gray-900">
+                            Purple
+                        </label>
                     </div>
                 </div>
+
                 <label for="title" class="text-white m-2 mt-2 block">Task</label>
                 @if ($errors->any())
                 @foreach ($errors->all() as $error)
@@ -119,8 +134,7 @@
 
                     <h2 class="mt-10 ml-6 mb-2 pb-0 text-white text-2xl">Todays tasks:</h2>
                     <ul class="list-disc list-inside">
-                        @if ($todaysTodos->isNotEmpty())
-                        @foreach ($todaysTodos as $todo)
+                        @forelse ($todaysTodos as $todo)
                         <li class="bg-gray-800 border {{ $todo->completed ? 'border-gray-500' : 'border-gray-300' }} rounded-md mt-2 md-2 flex">
                             <div class="bg-{{ $todo->tagColor }}-400 w-3 h-10 rounded-l-md"></div>
                             <div class="flex items-center justify-between p-2 w-full">
@@ -134,17 +148,15 @@
                                 <button type="submit" class="text-red-500 hover:text-red-700">Remove</button>
                             </form>
                         </li>
-                        @endforeach
-                        @else 
+                        @empty
                             <p>No tasks for today yet...</p>
-                        @endif
+                        @endforelse
 
                     </ul>
 
                     <h2 class="mt-10 ml-6 mb-2 pb-0 text-white text-2xl">Upcoming tasks:</h2>
                     <ul class="list-disc list-inside">
-                        @if ($upcomingTodos->isNotEmpty())
-                        @foreach ($upcomingTodos as $todo)
+                        @forelse ($upcomingTodos as $todo)
                         <li class="bg-gray-800 border {{ $todo->completed ? 'border-gray-500' : 'border-gray-300' }} rounded-md mt-2 md-2 flex">
                             <div class="bg-{{ $todo->tagColor }}-400 w-3 h-10 rounded-l-md"></div>
                             <div class="flex items-center justify-between p-2 w-full">
@@ -158,10 +170,9 @@
                                 <button type="submit" class="text-red-500 hover:text-red-700">Remove</button>
                             </form>
                         </li>
-                        @endforeach
-                        @else 
+                        @empty
                             <p>No upcoming tasks yet...</p>
-                        @endif
+                        @endforelse
                     </ul>
                 </div>
             </div>
