@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+    <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
@@ -287,7 +287,7 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="flex justify-between mb-10">
+            <div class="flex justify-between mb-10 mt-5 pt-4">
                 <h1 class="text-2xl text-gray-500">Hello <span class="text-white">{{ $name }}</span> here is
                     your calendar,</h1>
                 <div class="flex gap-10">
