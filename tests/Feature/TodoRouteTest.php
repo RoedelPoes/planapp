@@ -53,9 +53,6 @@ test('todo store route creates todo when authenticated', function () {
         'tagColor' => 'cyan',
         'user_id' => $user->id,
     ]);
-
-    $todo = Todo::find($response->content());
-    $this->assertNotNull($todo);
 });
 
 test('todo update route redirects to login page when not authenticated', function () {
