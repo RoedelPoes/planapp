@@ -522,8 +522,8 @@
                 // Drag and drop event
                 eventDrop: function(event) {
                     var id = event.id;
-                    var start_date = moment(event.start).format('YYYY-MM-DD HH:mm');
-                    var end_date = moment(event.end).format('YYYY-MM-DD HH:mm');
+                    var start_date = moment(event.start).format('YYYY-MM-DD HH:mm:ss');
+                    var end_date = moment(event.end).format('YYYY-MM-DD HH:mm:ss');
 
                     // Update event
                     $.ajax({
