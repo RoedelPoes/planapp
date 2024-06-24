@@ -1,11 +1,11 @@
-<!DOCTYPE html>
+    <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Home</title>
+    <title>Calendar</title>
     @vite('resources/css/app.css')
 
     <!-- CSRF Token -->
@@ -287,12 +287,17 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="flex justify-between mb-10">
-                <h1 class="text-2xl text-gray-500">Hello <span class="text-white">{{ $name }}</span> here is
-                    your calendar,</h1>
+            <div class="flex justify-between mb-10 mt-5 pt-4">
+                <div>
+                    <h1 class="text-2xl text-gray-500">Hello <span class="text-white">{{ $name }}</span> here is
+                        your calendar,</h1>
+                        <h2 class="text-lg text-gray-300">Click on any day to add en event</h2>
+
+                </div>
+
                 <div class="flex gap-10">
                     <div class="flex flex-col">
-                        <button class="text-l px-4 py-2 rounded  cursor-pointer hover:underline text-white"
+                        <button class="text-l px-4 py-2 rounded cursor-pointer hover:underline text-gray-400"
                             id="filterBtn">Filter</button>
 
                         <!-- Filter Modal -->
