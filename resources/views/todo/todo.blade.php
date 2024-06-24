@@ -164,7 +164,7 @@
                     <h2 class="mt-10 mb-6 pb-0 text-white text-2xl">Upcoming tasks:</h2>
                     <ul class="list-disc list-inside">
                         @forelse ($upcomingTodos as $todo)
-                        <li class="bg-gray-800 border {{ $todo->completed ? 'border-gray-500' : 'border-gray-300' }} rounded-md mt-2 md-2 flex">
+                        <li class="bg-gray-600 {{ $todo->completed ? 'bg-gray-600' : 'bg-gray-800' }} rounded-md mt-2 md-2 flex">
                             <div class="bg-{{ $todo->tagColor }}-400 w-3 h-10 rounded-l-md"></div>
                             <div class="flex items-center justify-between p-2 w-full">
                             <form action="/todo/complete/{{ $todo->id }}" method="POST" class="flex items-center">
