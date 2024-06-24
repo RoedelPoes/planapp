@@ -119,11 +119,13 @@
                             <div class="flex items-center justify-between p-2 w-full">
                                 <form action="/todo/complete/{{ $todo->id }}" method="POST" class="flex items-center">
                                     @csrf
+                                    @method('PATCH')
                                     <input type="checkbox" {{ $todo->completed ? 'checked' : '' }} onclick="this.form.submit()" class="h-5 w-5 rounded dark:bg-gray-900 border-gray-300 dark:border-gray-700 text-pink-600 shadow-sm focus:ring-pink-500 dark:focus:ring-pink-600 dark:focus:ring-offset-gray-800">
                                 </form>
                                 <span class="{{ $todo->completed ? 'line-through' : '' }} text-white">{{ $todo->title }}</span>
-                                <form action="/todo/destroy/{{ $todo->id }}" method="POST">
+                                <form action="{{ route('todo.destroy', ['id' => $todo->id]) }}" method="POST">
                                     @csrf
+                                    @method('DELETE')
                                     <button type="submit" class="text-red-500 hover:text-red-700">Remove</button>
                                 </form>
                             </div>
@@ -140,11 +142,13 @@
                             <div class="flex items-center justify-between p-2 w-full">
                             <form action="/todo/complete/{{ $todo->id }}" method="POST" class="flex items-center">
                                 @csrf
+                                @method('PATCH')
                                 <input type="checkbox" {{ $todo->completed ? 'checked' : '' }} onclick="this.form.submit()" class="h-5 w-5 rounded dark:bg-gray-900 border-gray-300 dark:border-gray-700 text-pink-600 shadow-sm focus:ring-pink-500 dark:focus:ring-pink-600 dark:focus:ring-offset-gray-800">
                             </form>
                             <span class="{{ $todo->completed ? 'line-through text-gray-400' : 'text-white' }}">{{ $todo->title }}</span>
                             <form action="/todo/destroy/{{ $todo->id }}" method="POST">
                                 @csrf
+                                @method('DELETE')
                                 <button type="submit" class="text-red-500 hover:text-red-700">Remove</button>
                             </form>
                         </li>
@@ -162,11 +166,13 @@
                             <div class="flex items-center justify-between p-2 w-full">
                             <form action="/todo/complete/{{ $todo->id }}" method="POST" class="flex items-center">
                                 @csrf
+                                @method('PATCH')
                                 <input type="checkbox" {{ $todo->completed ? 'checked' : '' }} onclick="this.form.submit()" class="h-5 w-5 rounded dark:bg-gray-900 border-gray-300 dark:border-gray-700 text-pink-600 shadow-sm focus:ring-pink-500 dark:focus:ring-pink-600 dark:focus:ring-offset-gray-800">
                             </form>
                             <span class="{{ $todo->completed ? 'line-through text-gray-400' : 'text-white' }}">{{ $todo->title }}</span>
                             <form action="/todo/destroy/{{ $todo->id }}" method="POST">
                                 @csrf
+                                @method('DELETE')
                                 <button type="submit" class="text-red-500 hover:text-red-700">Remove</button>
                             </form>
                         </li>
