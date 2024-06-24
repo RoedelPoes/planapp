@@ -24,8 +24,10 @@ class TodoController extends Controller
         $upcomingTodos = Todo::where('user_id', Auth::id())->orderBy('date')
         ->where('date', '>', $currentDay)->get();
 
+        $name = auth()->user()->name;
+
         return view('todo.todo')
-        ->with(['missedTodos' => $missedTodos,'todaysTodos' => $todaysTodos, 'upcomingTodos' => $upcomingTodos, 'currentDay' => $currentDay]);
+        ->with(['missedTodos' => $missedTodos,'todaysTodos' => $todaysTodos, 'upcomingTodos' => $upcomingTodos, 'currentDay' => $currentDay, 'name' => $name]);
     }
 
     /**

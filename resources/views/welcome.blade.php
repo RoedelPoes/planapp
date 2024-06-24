@@ -54,24 +54,6 @@
                             </a>
 
                         </div>
-                        
-
-                            {{-- <div class="bg-{{ $todo->tagColor }}-400 w-3 h-10 rounded-l-md"></div>
-                            <div class="flex items-center justify-between p-2 w-full">
-                                <form action="/todo/complete/{{ $todo->id }}" method="POST"
-                                    class="flex items-center">
-                                    @csrf
-                                    <input type="checkbox" {{ $todo->completed ? 'checked' : '' }}
-                                        onclick="this.form.submit()"
-                                        class="h-5 w-5 rounded dark:bg-gray-900 border-gray-300 dark:border-gray-700 text-pink-600 shadow-sm focus:ring-pink-500 dark:focus:ring-pink-600 dark:focus:ring-offset-gray-800">
-                                </form>
-                                <span
-                                    class="{{ $todo->completed ? 'line-through' : '' }} text-white">{{ $todo->title }}</span>
-                                <form action="/todo/destroy/{{ $todo->id }}" method="POST">
-                                    @csrf
-                                    <button type="submit" class="text-red-500 hover:text-red-700">Remove</button>
-                                </form>
-                            </div> --}}
 
 
                             <!-- If there are no upcoming appointments -->

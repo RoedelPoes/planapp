@@ -169,45 +169,12 @@
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="h-auto w-full rounded mt-5 py-4">
                     <div class="flex justify-between">
-                        <h1 class="text-2xl">Hello <span class="text-white">{{ $name }}</span> here are you
+                        <h1 class="text-2xl">Hello <span class="text-white">{{ $name }}</span> here are your
                             notes,</h1>
                         <div class="flex gap-10">
                             <button id="create-note"
                                 class="text-l bg-pink-500 px-4 py-2 rounded text-white hover:bg-pink-600">Create
                                 Note</button>
-                            <div class="flex flex-col">
-                                <button class="text-l px-4 py-2 rounded  cursor-pointer hover:underline"
-                                    id="filterBtn">Filter</button>
-                                <!-- Filter Modal -->
-                                <form id="colorFilterForm" action="{{ route('notes') }}" method="GET"
-                                    class="flex flex-col w-20 text-center z-50 absolute hidden">
-                                    <input type="radio" name="color-filter" id="color-filter-all" value="all"
-                                        checked class="hidden peer/all">
-                                    <label for="color-filter-all"
-                                        class="cursor-pointer py-2 px-4 bg-gray-600 rounded-t-xl peer-checked/all:bg-gray-500">All</label>
-
-                                    <input type="radio" name="color-filter" id="color-filter-cyan" value="cyan"
-                                        class="hidden peer/cyan">
-                                    <label for="color-filter-cyan"
-                                        class="cursor-pointer py-2 px-4 bg-gray-600  peer-checked/cyan:bg-gray-500">Cyan</label>
-
-                                    <input type="radio" name="color-filter" id="color-filter-green" value="green"
-                                        class="hidden peer/green">
-                                    <label for="color-filter-green"
-                                        class="cursor-pointer py-2 px-4 bg-gray-600  peer-checked/green:bg-gray-500">Green</label>
-
-                                    <input type="radio" name="color-filter" id="color-filter-yellow"
-                                        value="yellow" class="hidden peer/yellow">
-                                    <label for="color-filter-yellow"
-                                        class="cursor-pointer py-2 px-4 bg-gray-600  peer-checked/yellow:bg-gray-500">Yellow</label>
-
-                                    <input type="radio" name="color-filter" id="color-filter-purple"
-                                        value="purple" class="hidden peer/purple">
-                                    <label for="color-filter-purple"
-                                        class="cursor-pointer py-2 px-4 bg-gray-600 rounded-b-xl peer-checked/purple:bg-gray-500">Purple</label>
-                                </form>
-                            </div>
-
                         </div>
                     </div>
 

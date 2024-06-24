@@ -101,17 +101,20 @@
         </x-slot>
 
         <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <button id="addTask" class="bg-pink-500 text-white font-bold py-2 px-4 rounded inline-flex items-center hover:bg-pink-700">
-                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
-                    </svg>
-                    <span>New task</span>
-                </button>
+            <div class="max-w-7xl mx-auto mt-5 sm:px-6 lg:px-8">
+                <div class="flex justify-between pt-4">
+                    <h1 class="text-2xl">Hello <span class="text-white">{{ $name }}</span> here are you
+                        notes,</h1>
+                    <div class="flex gap-10">
+                        <button id="addTask"
+                            class="text-l bg-pink-500 px-4 py-2 rounded text-white hover:bg-pink-600">Create
+                            To-Do</button>
+                    </div>
+                </div>
                 <div class="h-auto w-full rounded py-4">
 
                     @if ($missedTodos->isNotEmpty())
-                    <h2 class="mt-10 ml-6 mb-2 pb-0 text-white text-2xl">Missed tasks:</h2>
+                    <h2 class="mt-10 mb-6 pb-0 text-white text-2xl">Missed tasks:</h2>
                     <ul class="list-disc list-inside">
                         @foreach ($missedTodos as $todo)
                         <li class="bg-gray-800 border border-red-700 rounded-md mt-2 md-2 flex">
@@ -134,10 +137,10 @@
                     </ul>
                     @endif
 
-                    <h2 class="mt-10 ml-6 mb-2 pb-0 text-white text-2xl">Todays tasks:</h2>
+                    <h2 class="mt-10 mb-6 pb-0 text-white text-2xl">Todays tasks:</h2>
                     <ul class="list-disc list-inside">
                         @forelse ($todaysTodos as $todo)
-                        <li class="bg-gray-800 border {{ $todo->completed ? 'border-gray-500' : 'border-gray-300' }} rounded-md mt-2 md-2 flex">
+                        <li class="bg-gray-600 {{ $todo->completed ? 'bg-gray-600' : 'bg-gray-800' }} rounded-md mt-2 md-2 flex">
                             <div class="bg-{{ $todo->tagColor }}-400 w-3 h-10 rounded-l-md"></div>
                             <div class="flex items-center justify-between p-2 w-full">
                             <form action="/todo/complete/{{ $todo->id }}" method="POST" class="flex items-center">
@@ -153,12 +156,12 @@
                             </form>
                         </li>
                         @empty
-                            <p>No tasks for today yet...</p>
+                            <p class="text-lg">No tasks for today yet...</p>
                         @endforelse
 
                     </ul>
 
-                    <h2 class="mt-10 ml-6 mb-2 pb-0 text-white text-2xl">Upcoming tasks:</h2>
+                    <h2 class="mt-10 mb-6 pb-0 text-white text-2xl">Upcoming tasks:</h2>
                     <ul class="list-disc list-inside">
                         @forelse ($upcomingTodos as $todo)
                         <li class="bg-gray-800 border {{ $todo->completed ? 'border-gray-500' : 'border-gray-300' }} rounded-md mt-2 md-2 flex">
@@ -177,7 +180,7 @@
                             </form>
                         </li>
                         @empty
-                            <p>No upcoming tasks yet...</p>
+                            <p class="text-lg">No upcoming tasks yet...</p>
                         @endforelse
                     </ul>
                 </div>
