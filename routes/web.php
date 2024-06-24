@@ -20,11 +20,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('calendar/destroy/{id}', [CalendarController::class, 'destroy'])->name('calendar.destroy');
 });
 
-//Todo Routes
-Route::middleware('auth')->group(function () {
-    Route::get('todo', [TodoController::class, 'index'])->name('todo');
-});
-
 //Notes Routes
 Route::middleware('auth')->group(function () {
     Route::get('notes', [NoteController::class, 'index'])->name('notes');
@@ -44,8 +39,8 @@ Route::middleware('auth')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::get('todo', [TodoController::class, 'index'])->name('todo');
     Route::post('todo', [TodoController::class, 'store'])->name('todo.store');
-    Route::post('todo/complete/{id}', [TodoController::class, 'update'])->name('todo.update');
-    Route::post('todo/destroy/{id}', [TodoController::class, 'destroy'])->name('todo.destroy');
+    Route::patch('todo/complete/{id}', [TodoController::class, 'update'])->name('todo.update');
+    Route::delete('todo/destroy/{id}', [TodoController::class, 'destroy'])->name('todo.destroy');
 });
 
 

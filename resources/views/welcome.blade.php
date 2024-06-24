@@ -85,7 +85,7 @@
                     <h2 class="ml-6 mb-6 mt-2 pb-0 text-white text-2xl">Todays tasks:</h2>
                     <ul class="list-disc list-inside">
                     @forelse ($todaysTodos as $todo)
-                    <li class="bg-gray-800 border {{ $todo->completed ? 'border-gray-500' : 'border-gray-300' }} rounded-md mt-2 md-2 flex mx-5">
+                    <li class="bg-gray-600 rounded-md mt-2 md-2 flex mx-6">
                         <div class="bg-{{ $todo->tagColor }}-400 w-3 h-10 rounded-l-md"></div>
                         <div class="flex items-center justify-between p-2 w-full">
                         <form action="/todo/complete/{{ $todo->id }}" method="POST" class="flex items-center">
