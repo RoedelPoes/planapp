@@ -28,7 +28,7 @@ test('calendar index route returns view with events when authenticated', functio
     $response = $this->get('/calendar');
 
     $response->assertStatus(200);
-    $response->assertViewHas('events');
+    $response->assertSee('Test Event');
 });
 
 test('calendar store route redirects to login page when not authenticated', function () {

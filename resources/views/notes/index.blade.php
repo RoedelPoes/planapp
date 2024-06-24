@@ -175,116 +175,151 @@
                             <button id="create-note"
                                 class="text-l bg-pink-500 px-4 py-2 rounded text-white hover:bg-pink-600">Create
                                 Note</button>
+                            <div class="flex flex-col">
+                                <button class="text-l px-4 py-2 rounded cursor-pointer hover:underline text-gray-400"
+                                    id="filterBtn">Filter</button>
+
+                                <!-- Filter Modal -->
+                                <form id="colorFilterForm" action="{{ route('notes') }}" method="GET"
+                                    class="flex flex-col w-20 text-center z-50 absolute hidden text-white">
+                                    <input type="radio" name="color-filter" id="color-filter-all" value="all"
+                                        checked class="hidden peer/all">
+                                    <label for="color-filter-all"
+                                        class="cursor-pointer py-2 px-4 bg-slate-800 rounded-t-xl peer-checked/all:bg-slate-500">All</label>
+
+                                    <input type="radio" name="color-filter" id="color-filter-cyan" value="cyan"
+                                        class="hidden peer/cyan">
+                                    <label for="color-filter-cyan"
+                                        class="cursor-pointer py-2 px-4 bg-slate-800  peer-checked/cyan:bg-slate-500">Cyan</label>
+
+                                    <input type="radio" name="color-filter" id="color-filter-green" value="green"
+                                        class="hidden peer/green">
+                                    <label for="color-filter-green"
+                                        class="cursor-pointer py-2 px-4 bg-slate-800  peer-checked/green:bg-slate-500">Green</label>
+
+                                    <input type="radio" name="color-filter" id="color-filter-yellow"
+                                        value="yellow" class="hidden peer/yellow">
+                                    <label for="color-filter-yellow"
+                                        class="cursor-pointer py-2 px-4 bg-slate-800  peer-checked/yellow:bg-slate-500">Yellow</label>
+
+                                    <input type="radio" name="color-filter" id="color-filter-purple"
+                                        value="purple" class="hidden peer/purple">
+                                    <label for="color-filter-purple"
+                                        class="cursor-pointer py-2 px-4 bg-slate-800 rounded-b-xl peer-checked/purple:bg-slate-500">Purple</label>
+                                </form>
+                            </div>
+
                         </div>
                     </div>
-
-
-
-
-
-                    <section id="notes" class="mt-10">
-                        <div class="mx-auto">
-                            @if (count($notes) == 0 && request()->has('color-filter') && request()->get('color-filter') != 'all')
-                                <h3 class="text-lg w-full">No notes match your current filter criteria. Try
-                                    adjusting
-                                    your filters or create a new note to get started!</h3>
-                            @elseif (count($notes) == 0)
-                                <h3 class="text-lg w-full">You have no notes yet. Create a new note to get
-                                    started!</h3>
-                            @endif
-
-
-
-                            <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
-
-
-                                <ul class="space-y-8">
-                                    @foreach ($notes as $index => $note)
-                                        @if ($index % 3 == 0)
-                                            <li class="text-sm leading-6">
-                                                <div class="relative space-y-6 rounded-lg bg-slate-800">
-                                                    <div class="flex items-center space-x-4">
-                                                        <h3
-                                                            class="text-lg text-black font-semibold text-white bg-{{ $note->tagColor }}-400 w-full px-4 py-2 rounded-tr-lg rounded-tl-lg">
-                                                            {{ $note->title }}</h3>
-                                                    </div>
-                                                    <p class="text-gray-300 text-md px-4">{{ $note->content }}</p>
-                                                    <div class="flex justify-between">
-                                                        <p class="text-gray-500 px-4 pb-3">Last edited on
-                                                            {{ $note->updated_at->format('d-m-Y') }}</p>
-                                                        <p id="editBtn" data-id="{{ $note->id }}"
-                                                            data-title="{{ $note->title }}"
-                                                            data-content="{{ $note->content }}"
-                                                            data-color="{{ $note->tagColor }}"
-                                                            class="editBtn text-gray-500 px-4 pb-3 hover:underline cursor-pointer">
-                                                            Edit</p>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                        @endif
-                                    @endforeach
-                                </ul>
-
-                                <ul class="space-y-8">
-                                    @foreach ($notes as $index => $note)
-                                        @if ($index % 3 == 1)
-                                            <li class="text-sm leading-6">
-                                                <div class="relative space-y-6 rounded-lg bg-slate-800">
-                                                    <div class="flex items-center space-x-4">
-                                                        <h3
-                                                            class="text-lg text-black font-semibold text-white bg-{{ $note->tagColor }}-400 w-full px-4 py-2 rounded-tr-lg rounded-tl-lg">
-                                                            {{ $note->title }}</h3>
-                                                    </div>
-                                                    <p class="text-gray-300 text-md px-4">{{ $note->content }}</p>
-                                                    <div class="flex justify-between">
-                                                        <p class="text-gray-500 px-4 pb-3">Last edited on
-                                                            {{ $note->updated_at->format('d-m-Y') }}</p>
-                                                        <p id="editBtn" data-id="{{ $note->id }}"
-                                                            data-title="{{ $note->title }}"
-                                                            data-content="{{ $note->content }}"
-                                                            data-color="{{ $note->tagColor }}"
-                                                            class="editBtn text-gray-500 px-4 pb-3 hover:underline cursor-pointer">
-                                                            Edit</p>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                        @endif
-                                    @endforeach
-                                </ul>
-
-                                <ul class="space-y-8">
-                                    @foreach ($notes as $index => $note)
-                                        @if ($index % 3 == 2)
-                                            <li class="text-sm leading-6">
-                                                <div class="relative space-y-6 rounded-lg bg-slate-800">
-                                                    <div class="flex items-center space-x-4">
-                                                        <h3
-                                                            class="text-lg text-black font-semibold text-white bg-{{ $note->tagColor }}-400 w-full px-4 py-2 rounded-tr-lg rounded-tl-lg">
-                                                            {{ $note->title }}</h3>
-                                                    </div>
-                                                    <p class="text-gray-300 text-md px-4">{{ $note->content }}</p>
-                                                    <div class="flex justify-between">
-                                                        <p class="text-gray-500 px-4 pb-3">Last edited on
-                                                            {{ $note->updated_at->format('d-m-Y') }}</p>
-                                                        <p id="editBtn" data-id="{{ $note->id }}"
-                                                            data-title="{{ $note->title }}"
-                                                            data-content="{{ $note->content }}"
-                                                            data-color="{{ $note->tagColor }}"
-                                                            class="editBtn text-gray-500 px-4 pb-3 hover:underline cursor-pointer">
-                                                            Edit</p>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                        @endif
-                                    @endforeach
-                                </ul>
-
-
-                            </div>
-                        </div>
-                    </section>
                 </div>
+
+
+
+
+
+                <section id="notes" class="mt-10">
+                    <div class="mx-auto">
+                        @if (count($notes) == 0 && request()->has('color-filter') && request()->get('color-filter') != 'all')
+                            <h3 class="text-lg w-full">No notes match your current filter criteria. Try
+                                adjusting
+                                your filters or create a new note to get started!</h3>
+                        @elseif (count($notes) == 0)
+                            <h3 class="text-lg w-full">You have no notes yet. Create a new note to get
+                                started!</h3>
+                        @endif
+
+
+
+                        <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
+
+
+                            <ul class="space-y-8">
+                                @foreach ($notes as $index => $note)
+                                    @if ($index % 3 == 0)
+                                        <li class="text-sm leading-6">
+                                            <div class="relative space-y-6 rounded-lg bg-slate-800">
+                                                <div class="flex items-center space-x-4">
+                                                    <h3
+                                                        class="text-lg text-black font-semibold text-white bg-{{ $note->tagColor }}-400 w-full px-4 py-2 rounded-tr-lg rounded-tl-lg">
+                                                        {{ $note->title }}</h3>
+                                                </div>
+                                                <p class="text-gray-300 text-md px-4">{{ $note->content }}</p>
+                                                <div class="flex justify-between">
+                                                    <p class="text-gray-500 px-4 pb-3">Last edited on
+                                                        {{ $note->updated_at->format('d-m-Y') }}</p>
+                                                    <p id="editBtn" data-id="{{ $note->id }}"
+                                                        data-title="{{ $note->title }}"
+                                                        data-content="{{ $note->content }}"
+                                                        data-color="{{ $note->tagColor }}"
+                                                        class="editBtn text-gray-500 px-4 pb-3 hover:underline cursor-pointer">
+                                                        Edit</p>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    @endif
+                                @endforeach
+                            </ul>
+
+                            <ul class="space-y-8">
+                                @foreach ($notes as $index => $note)
+                                    @if ($index % 3 == 1)
+                                        <li class="text-sm leading-6">
+                                            <div class="relative space-y-6 rounded-lg bg-slate-800">
+                                                <div class="flex items-center space-x-4">
+                                                    <h3
+                                                        class="text-lg text-black font-semibold text-white bg-{{ $note->tagColor }}-400 w-full px-4 py-2 rounded-tr-lg rounded-tl-lg">
+                                                        {{ $note->title }}</h3>
+                                                </div>
+                                                <p class="text-gray-300 text-md px-4">{{ $note->content }}</p>
+                                                <div class="flex justify-between">
+                                                    <p class="text-gray-500 px-4 pb-3">Last edited on
+                                                        {{ $note->updated_at->format('d-m-Y') }}</p>
+                                                    <p id="editBtn" data-id="{{ $note->id }}"
+                                                        data-title="{{ $note->title }}"
+                                                        data-content="{{ $note->content }}"
+                                                        data-color="{{ $note->tagColor }}"
+                                                        class="editBtn text-gray-500 px-4 pb-3 hover:underline cursor-pointer">
+                                                        Edit</p>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    @endif
+                                @endforeach
+                            </ul>
+
+                            <ul class="space-y-8">
+                                @foreach ($notes as $index => $note)
+                                    @if ($index % 3 == 2)
+                                        <li class="text-sm leading-6">
+                                            <div class="relative space-y-6 rounded-lg bg-slate-800">
+                                                <div class="flex items-center space-x-4">
+                                                    <h3
+                                                        class="text-lg text-black font-semibold text-white bg-{{ $note->tagColor }}-400 w-full px-4 py-2 rounded-tr-lg rounded-tl-lg">
+                                                        {{ $note->title }}</h3>
+                                                </div>
+                                                <p class="text-gray-300 text-md px-4">{{ $note->content }}</p>
+                                                <div class="flex justify-between">
+                                                    <p class="text-gray-500 px-4 pb-3">Last edited on
+                                                        {{ $note->updated_at->format('d-m-Y') }}</p>
+                                                    <p id="editBtn" data-id="{{ $note->id }}"
+                                                        data-title="{{ $note->title }}"
+                                                        data-content="{{ $note->content }}"
+                                                        data-color="{{ $note->tagColor }}"
+                                                        class="editBtn text-gray-500 px-4 pb-3 hover:underline cursor-pointer">
+                                                        Edit</p>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    @endif
+                                @endforeach
+                            </ul>
+
+
+                        </div>
+                    </div>
+                </section>
             </div>
+        </div>
         </div>
     </x-app-layout>
 
@@ -367,136 +402,136 @@
         //Save Note to the database
         $('#saveBtnNotes').click(function() {
 
-                    //Get the values from the inputs
-                    var title = $('#title').val();
-                    var content = $('#note-content').val();
-                    var tagColor = $('#radio-buttons input:checked').val();
+            //Get the values from the inputs
+            var title = $('#title').val();
+            var content = $('#note-content').val();
+            var tagColor = $('#radio-buttons input:checked').val();
 
-                    var titleExceedsLength = title.length > 30;
-                    var contentExceedsLength = content.length > 999;
+            var titleExceedsLength = title.length > 30;
+            var contentExceedsLength = content.length > 999;
 
-                
 
-                        // Save the note to the database
-                        $.ajax({
-                            url: "{{ route('notes.store') }}",
-                            type: 'POST',
-                            data: {
-                                title: title,
-                                content: content,
-                                tagColor: tagColor,
-                            },
-                            success: function(response) {
-                                // Close the modal, clear the inputs, etc.
-                                $('#title').val('');
-                                $('#note-content').val('');
-                                $('#color-tag').removeClass();
-                                $('#color-tag').addClass('w-full bg-cyan-400 h-10');
 
-                                location.reload();
-                            },
-                            error: function(error) {
-                                console.error(error);
-                                if (error.responseJSON.errors.title) {
-                                $('#titleError').text(error.responseJSON.errors.title[0]);
-                                }
-                                if (error.responseJSON.errors.content) {
-                                $('#titleError').text(error.responseJSON.errors.content[0]);
-                                }
-                            }
-                        });
-
-                    });
-
-                //Open Edit Modal and set the values
-                $('.editBtn').click(function() {
-                    $('#editNotesModal').removeClass('hidden'); //Open Edit Modal
-
-                    var color = $(this).val();
+            // Save the note to the database
+            $.ajax({
+                url: "{{ route('notes.store') }}",
+                type: 'POST',
+                data: {
+                    title: title,
+                    content: content,
+                    tagColor: tagColor,
+                },
+                success: function(response) {
+                    // Close the modal, clear the inputs, etc.
+                    $('#title').val('');
+                    $('#note-content').val('');
                     $('#color-tag').removeClass();
-                    $('#color-tag').addClass('w-full bg-' + color + '-400 h-10');
+                    $('#color-tag').addClass('w-full bg-cyan-400 h-10');
 
-                    //Get the values from the clicked note
-                    var id = $(this).data('id');
-                    var title = $(this).data('title');
-                    var content = $(this).data('content');
-                    var color = $(this).data('color');
+                    location.reload();
+                },
+                error: function(error) {
+                    console.error(error);
+                    if (error.responseJSON.errors.title) {
+                        $('#titleError').text(error.responseJSON.errors.title[0]);
+                    }
+                    if (error.responseJSON.errors.content) {
+                        $('#titleError').text(error.responseJSON.errors.content[0]);
+                    }
+                }
+            });
 
-                    // Set the values to the edit modal
-                    $('#editTitle').val(title);
-                    $('#editContent').val(content);
-                    $('#edit-color-tag').removeClass();
-                    $('#edit-color-tag').addClass('w-full bg-' + color + '-400 h-10'); //Set correct color tag
+        });
 
-                    // Set selected radio button
-                    $('#editRadio-buttons input').each(function() {
-                        if ($(this).val() == color) {
-                            $(this).prop('checked', true);
-                        }
-                    });
+        //Open Edit Modal and set the values
+        $('.editBtn').click(function() {
+            $('#editNotesModal').removeClass('hidden'); //Open Edit Modal
 
-                    // Set the id to the save button
-                    $('#editSaveBtnNotes').data('id', id);
+            var color = $(this).val();
+            $('#color-tag').removeClass();
+            $('#color-tag').addClass('w-full bg-' + color + '-400 h-10');
+
+            //Get the values from the clicked note
+            var id = $(this).data('id');
+            var title = $(this).data('title');
+            var content = $(this).data('content');
+            var color = $(this).data('color');
+
+            // Set the values to the edit modal
+            $('#editTitle').val(title);
+            $('#editContent').val(content);
+            $('#edit-color-tag').removeClass();
+            $('#edit-color-tag').addClass('w-full bg-' + color + '-400 h-10'); //Set correct color tag
+
+            // Set selected radio button
+            $('#editRadio-buttons input').each(function() {
+                if ($(this).val() == color) {
+                    $(this).prop('checked', true);
+                }
+            });
+
+            // Set the id to the save button
+            $('#editSaveBtnNotes').data('id', id);
 
 
 
-                });
+        });
 
-                //Change color tag on radio button change for edit modal
-                $('#editRadio-buttons input').on('change', function() {
-                    var color = $(this).val();
-                    $('#edit-color-tag').removeClass();
-                    $('#edit-color-tag').addClass('w-full bg-' + color + '-400 h-10');
-                });
+        //Change color tag on radio button change for edit modal
+        $('#editRadio-buttons input').on('change', function() {
+            var color = $(this).val();
+            $('#edit-color-tag').removeClass();
+            $('#edit-color-tag').addClass('w-full bg-' + color + '-400 h-10');
+        });
 
-                //Close Edit Modal
-                $('#editCloseBtnNotes').click(function() {
+        //Close Edit Modal
+        $('#editCloseBtnNotes').click(function() {
+            $('#editNotesModal').addClass('hidden');
+        });
+
+        // Update the note with the new values
+        $('#editSaveBtnNotes').click(function() {
+            // Get the values from the inputs
+            var id = $(this).data('id');
+            var updatedTitle = $('#editTitle').val();
+            var updatedContent = $('#editContent').val();
+            var updatedColor = $('input[name="edit-color-radio"]:checked').val();
+
+            // Update the note
+            $.ajax({
+                url: "{{ route('notes.update', '') }}" + '/' + id,
+                type: "PATCH",
+                dataType: 'json',
+                data: {
+                    title: updatedTitle,
+                    content: updatedContent,
+                    tagColor: updatedColor,
+                },
+                success: function(response) {
                     $('#editNotesModal').addClass('hidden');
-                });
+                    location.reload();
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+        });
 
-                // Update the note with the new values
-                $('#editSaveBtnNotes').click(function() {
-                    // Get the values from the inputs
-                    var id = $(this).data('id');
-                    var updatedTitle = $('#editTitle').val();
-                    var updatedContent = $('#editContent').val();
-                    var updatedColor = $('input[name="edit-color-radio"]:checked').val();
-
-                    // Update the note
-                    $.ajax({
-                        url: "{{ route('notes.update', '') }}" + '/' + id,
-                        type: "PATCH",
-                        dataType: 'json',
-                        data: {
-                            title: updatedTitle,
-                            content: updatedContent,
-                            tagColor: updatedColor,
-                        },
-                        success: function(response) {
-                            $('#editNotesModal').addClass('hidden');
-                            location.reload();
-                        },
-                        error: function(error) {
-                            console.log(error);
-                        }
-                    });
-                });
-
-                // Delete the note
-                $('#deleteEditButton').click(function() {
-                    var id = $('#editSaveBtnNotes').data('id');
-                    $.ajax({
-                        url: "{{ route('notes.destroy', '') }}" + '/' + id,
-                        type: 'DELETE',
-                        success: function(response) {
-                            $('#editNotesModal').addClass('hidden');
-                            location.reload();
-                        },
-                        error: function(error) {
-                            console.log(error);
-                        }
-                    });
-                });
+        // Delete the note
+        $('#deleteEditButton').click(function() {
+            var id = $('#editSaveBtnNotes').data('id');
+            $.ajax({
+                url: "{{ route('notes.destroy', '') }}" + '/' + id,
+                type: 'DELETE',
+                success: function(response) {
+                    $('#editNotesModal').addClass('hidden');
+                    location.reload();
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+        });
     </script>
 
 </body>
