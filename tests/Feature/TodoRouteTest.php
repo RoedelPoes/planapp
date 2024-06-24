@@ -45,7 +45,7 @@ test('todo store route creates todo when authenticated', function () {
         'tagColor' => 'cyan',
     ]);
 
-    $response->assertStatus(200);
+    $response->assertStatus(302);
     $this->assertDatabaseHas('todos', [
         'title' => 'Test Event',
         'date' => '2024-07-04 00:00:00',
